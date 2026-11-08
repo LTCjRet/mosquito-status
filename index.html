@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mosquito Control Center</title>
+<style>
+:root{--bg:#f5f4ef;--card:#fff;--ink:#1d2126;--muted:#5d6670;--line:#dcd8cc;--olive:#4b5d3a;
+--active:#2f7d4a;--review:#2a62a8;--wait:#b26a00;--block:#a83232;--idle:#7a828a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#15181b;--card:#1f2327;--ink:#e8e6df;--muted:#9aa3ab;--line:#33393f;
+--olive:#93a97a;--active:#5cc184;--review:#6ea3e6;--wait:#e3a43c;--block:#e07070;--idle:#8b939a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
+header{padding:18px 20px 10px;border-bottom:3px solid var(--olive)}
+h1{margin:0;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.sub{color:var(--muted);font-size:13px}
+main{max-width:1000px;margin:0 auto;padding:16px 20px 40px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--olive);margin:26px 0 8px}
+.banner{padding:10px 14px;border-radius:8px;font-weight:600;margin-top:14px;border:1px solid var(--line);background:var(--card)}
+.banner.paused{border-color:var(--block);color:var(--block)}
+.banner.running{border-color:var(--active);color:var(--active)}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--idle);border-radius:8px;padding:10px 12px}
+.card.active{border-left-color:var(--active)}.card.reviewing{border-left-color:var(--review)}
+.card.waiting-for-john{border-left-color:var(--wait)}.card.blocked{border-left-color:var(--block)}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.name{font-weight:700}.model{font-size:12px;color:var(--muted);text-transform:uppercase}
+.state{font-size:12px;font-weight:700;text-transform:uppercase}
+.active .state{color:var(--active)}.reviewing .state{color:var(--review)}.waiting-for-john .state{color:var(--wait)}
+.blocked .state{color:var(--block)}.idle .state{color:var(--idle)}
+.task{margin:6px 0}.meta{font-size:12px;color:var(--muted)}
+.need{margin-top:6px;padding:6px 8px;border-radius:6px;background:color-mix(in srgb,var(--wait) 14%,transparent);font-size:13px}
+.stale{color:var(--wait);font-weight:600}
+a{color:var(--review)}
+ul.list{list-style:none;padding:0;margin:0}
+ul.list li{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:6px}
+.counts{display:flex;gap:10px;flex-wrap:wrap}
+.count{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+.count b{font-size:20px;display:block}
+pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;font-size:12px;margin:0}
+.empty{color:var(--muted);font-style:italic}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mosquito Control Center</h1>
+  <div class="sub">Claude + Codex agent status &middot; <span id="refreshed">loading&hellip;</span></div>
+</header>
+<main>
+  <div id="pause" class="banner">Checking the pause switch&hellip;</div>
+
+  <h2>Needs your input</h2>
+  <ul class="list" id="needs"></ul>
+
+  <h2>Agents</h2>
+  <div class="grid" id="agents"></div>
+
+  <h2>Runs today</h2>
+  <div class="counts" id="counts"></div>
+  <div style="margin-top:8px"><pre id="runlog"></pre></div>
+</main>
+<script>
+const OWNER = "LTCjRet", REPO = "mosquito-status";
+const ORDER = {"waiting-for-john":0, "blocked":1, "active":2, "reviewing":3, "idle":4};
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const bust = () => "?t=" + Date.now();
+
+async function getJSON(path) {
+  try { const r = await fetch(path + bust(), {cache: "no-store"}); return r.ok ? await r.json() : null; }
+  catch { return null; }
+}
+async function getText(path) {
+  try { const r = await fetch(path + bust(), {cache: "no-store"}); return r.ok ? await r.text() : ""; }
+  catch { return ""; }
+}
+function ago(iso) {
+  const t = Date.parse(iso); if (!t) return "time unknown";
+  const m = Math.round((Date.now() - t) / 60000);
+  if (m < 1) return "just now"; if (m < 60) return m + " min ago";
+  const h = Math.round(m / 60); if (h < 48) return h + " h ago";
+  return Math.round(h / 24) + " days ago";
+}
+function today() {
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+
+async function listAgents() {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/agents`, {cache: "no-store"});
+    if (!r.ok) return null;
+    return (await r.json()).filter(f => f.name.endsWith(".json")).map(f => f.name);
+  } catch { return null; }
+}
+
+async function refresh() {
+  // Pause switch
+  const pause = await getJSON("pause.json");
+  const pb = $("pause");
+  const editLink = `<a href="https://github.com/${OWNER}/${REPO}/edit/main/pause.json" target="_blank" rel="noopener">change</a>`;
+  if (pause && pause.paused) { pb.className = "banner paused"; pb.innerHTML = "&#9632; ALL AGENTS PAUSED &middot; " + editLink; }
+  else { pb.className = "banner running"; pb.innerHTML = "&#9654; Agents may run &middot; " + editLink + " (set \"paused\": true to stop all)"; }
+
+  // Agents
+  const names = await listAgents();
+  let agents = [];
+  if (names) agents = (await Promise.all(names.map(n => getJSON("agents/" + n)))).filter(Boolean);
+  agents.sort((a, b) => (ORDER[a.state] ?? 5) - (ORDER[b.state] ?? 5) || String(a.agent).localeCompare(String(b.agent)));
+  $("agents").innerHTML = names === null
+    ? '<div class="empty">Could not list agents (GitHub may be rate-limiting; it retries every two minutes).</div>'
+    : agents.length ? agents.map(a => {
+        const st = esc(a.state || "idle");
+        const old = a.updated && (Date.now() - Date.parse(a.updated)) > 3 * 3600e3 && a.state !== "idle";
+        return `<div class="card ${st}">
+          <div class="top"><span class="name">${esc(a.agent)}</span><span class="model">${esc(a.model)}</span></div>
+          <div class="top"><span class="state">${st.replace(/-/g, " ")}</span><span class="meta">${esc(a.role)}</span></div>
+          <div class="task">${esc(a.task) || '<span class="empty">no task</span>'}</div>
+          <div class="meta">${a.reviewed_by ? "Reviewed by " + esc(a.reviewed_by) : ""}${a.reviews_for ? "Reviews for " + esc(a.reviews_for) : ""}</div>
+          <div class="meta">Updated ${esc(ago(a.updated))}${old ? ' <span class="stale">(stale?)</span>' : ""}
+            ${a.link ? ` &middot; <a href="${esc(a.link)}" target="_blank" rel="noopener">link</a>` : ""}</div>
+          ${a.needs_john ? `<div class="need">Needs you: ${esc(a.needs_john)}</div>` : ""}
+        </div>`;
+      }).join("")
+    : '<div class="empty">No agents have reported yet.</div>';
+
+  // Needs your input: decisions.json plus agents waiting for John
+  const decisions = (await getJSON("decisions.json")) || [];
+  const needs = [
+    ...decisions.map(d => `<li><b>${esc(d.question)}</b><div class="meta">From ${esc(d.from)} &middot; opened ${esc(ago(d.opened))}
+      ${d.link ? ` &middot; <a href="${esc(d.link)}" target="_blank" rel="noopener">open the issue</a>` : ""}</div></li>`),
+    ...agents.filter(a => a.needs_john).map(a => `<li><b>${esc(a.agent)}</b>: ${esc(a.needs_john)}</li>`)
+  ];
+  $("needs").innerHTML = needs.length ? needs.join("") : '<li class="empty">Nothing waiting for you.</li>';
+
+  // Runs today
+  const log = (await getText("runs/" + today() + ".log")).trim();
+  const lines = log ? log.split(/\r?\n/) : [];
+  const per = {};
+  lines.forEach(l => { const m = (l.split("|")[2] || "").trim().toLowerCase(); if (m) per[m] = (per[m] || 0) + 1; });
+  $("counts").innerHTML = ["claude", "codex"].map(m => `<div class="count"><b>${per[m] || 0}</b>${m === "claude" ? "Claude" : "Codex"} runs</div>`).join("");
+  $("runlog").textContent = lines.length ? lines.slice(-15).reverse().join("\n") : "No runs logged today.";
+
+  $("refreshed").textContent = "updated " + new Date().toLocaleTimeString() + " \u00b7 refreshes every 2 minutes";
+}
+refresh();
+setInterval(refresh, 120000);
+</script>
+</body>
+</html>
