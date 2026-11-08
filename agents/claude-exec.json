@@ -1,0 +1,13 @@
+{
+  "agent": "claude-exec",
+  "model": "claude",
+  "role": "Executive candidate",
+  "reviews_for": null,
+  "reviewed_by": null,
+  "state": "active",
+  "task": "Writing executive pitch",
+  "link": null,
+  "needs_john": null,
+  "started": "2026-11-08T13:51:00-05:00",
+  "updated": "2026-11-08T13:51:00-05:00"
+}
