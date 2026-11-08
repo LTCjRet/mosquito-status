@@ -3,11 +3,11 @@
   "model": "codex",
   "role": "Executive",
   "reviews_for": null,
-  "reviewed_by": null,
-  "state": "idle",
-  "task": "Claude requested changes to PR #15; executive revision queued",
+  "reviewed_by": "claude-review-exec",
+  "state": "active",
+  "task": "Addressing Claude review findings on PR #15",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
   "needs_john": null,
-  "started": "2026-11-08T15:32:59-05:00",
-  "updated": "2026-11-08T15:32:59-05:00"
+  "started": "2026-11-08T15:35:00-05:00",
+  "updated": "2026-11-08T15:35:00-05:00"
 }
