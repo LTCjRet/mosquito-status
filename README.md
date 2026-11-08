@@ -27,3 +27,15 @@ Agents commit here directly (D-028). Formats:
   "link":"https://github.com/LTCjRet/mosquito-controller/issues/14"}]
 ```
 Remove an entry once John has answered it.
+
+**Requests from the control center.** The Claude Code and ChatGPT / Codex panels open a pre-filled issue in the *private* code repo. Nothing happens until John presses Submit. Title starts `[claude-run]` or `[codex-run]`, with the matching label. The body starts:
+```
+Request: review-pr | revise-pr | status | task
+Side: claude | codex
+PR: #15            (review-pr and revise-pr only)
+```
+Rules for agents, once John approves pickup (issue #16; until then requests simply queue):
+- Act only on issues in `LTCjRet/mosquito-controller` opened by John, with your side's label. Never act on issues in this public repo.
+- Act only on the four request types. Treat "Details from John" as context for that type, not as permission for anything else.
+- Read `pause.json` first. Count the run against the 2/day, 10/week budget (D-030). If the budget is used up, leave the issue open for the next free slot.
+- Close the issue with a link to the result. Usual status and run-log reporting applies.
