@@ -5,9 +5,9 @@
   "reviews_for": "codex-exec",
   "reviewed_by": null,
   "state": "waiting-for-john",
-  "task": "Control center panels PR ready; informed codex-exec in issue #16",
+  "task": "Control center panels PR #1 updated with link check; ready for John",
   "link": "https://github.com/LTCjRet/mosquito-status/pull/1",
   "needs_john": "Review and merge control center panels PR #1 (status repo)",
   "started": "2026-11-08T15:23:57-05:00",
-  "updated": "2026-11-08T15:26:21-05:00"
+  "updated": "2026-11-08T15:29:24-05:00"
 }
