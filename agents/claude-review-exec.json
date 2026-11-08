@@ -1,13 +1,13 @@
 {
   "agent": "claude-review-exec",
   "model": "claude",
-  "role": "Paired reviewer for the executive",
+  "role": "Claude worker (owner request)",
   "reviews_for": "codex-exec",
   "reviewed_by": null,
-  "state": "idle",
-  "task": "Reviewed PR #15 at 5ed6401: changes requested (conflict, run count, talk-on task, no-joy criterion)",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
+  "state": "active",
+  "task": "Adding Claude Code and ChatGPT/Codex panels to the control center (owner-requested, over 2/day budget)",
+  "link": null,
   "needs_john": null,
-  "started": "2026-11-08T15:12:00-05:00",
-  "updated": "2026-11-08T15:13:49-05:00"
+  "started": "2026-11-08T15:23:57-05:00",
+  "updated": "2026-11-08T15:23:57-05:00"
 }
