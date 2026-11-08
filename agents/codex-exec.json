@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": null,
-  "state": "active",
-  "task": "Checking Control Center next action",
+  "state": "idle",
+  "task": "Claude requested changes to PR #15; executive revision queued",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
   "needs_john": null,
-  "started": "2026-11-08T20:32:59Z",
-  "updated": "2026-11-08T20:32:59Z"
+  "started": "2026-11-08T15:32:59-05:00",
+  "updated": "2026-11-08T15:32:59-05:00"
 }
