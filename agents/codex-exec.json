@@ -4,10 +4,10 @@
   "role": "Executive candidate",
   "reviews_for": null,
   "reviewed_by": null,
-  "state": "active",
-  "task": "Writing executive pitch",
-  "link": null,
-  "needs_john": null,
+  "state": "idle",
+  "task": "Executive pitch PR open for approval",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/13",
+  "needs_john": "Review executive pitch and select executive agent",
   "started": "2026-11-08T13:41:03-05:00",
-  "updated": "2026-11-08T13:41:03-05:00"
+  "updated": "2026-11-08T13:43:17-05:00"
 }
