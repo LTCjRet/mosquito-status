@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": null,
-  "state": "active",
-  "task": "Checking updated binding plan on main",
+  "state": "waiting-for-john",
+  "task": "Binding uploads read; PR #15 reconciled",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
-  "needs_john": null,
+  "needs_john": "Approve roster/test and resolve remaining automation-cap verification in issue #16",
   "started": "2026-11-08T14:53:17-05:00",
-  "updated": "2026-11-08T14:53:17-05:00"
+  "updated": "2026-11-08T14:54:44-05:00"
 }
