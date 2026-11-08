@@ -1,6 +1,6 @@
 [
   {
-    "question": "Resolve missing binding plan/account automation caps and approve week 1 roster/test package",
+    "question": "Approve week 1 roster/test and resolve remaining account automation-cap verification",
     "from": "codex-exec",
     "opened": "2026-11-08T14:40:01-05:00",
     "link": "https://github.com/LTCjRet/mosquito-controller/issues/16"
