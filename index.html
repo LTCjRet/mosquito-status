@@ -104,6 +104,13 @@ const ORDER = {"waiting-for-john":0, "blocked":1, "active":2, "reviewing":3, "id
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const bust = () => "?t=" + Date.now();
+// Links from status files are shown only if they point to the owner's repos on github.com over HTTPS.
+function safeLink(u) {
+  try {
+    const x = new URL(String(u));
+    return x.protocol === "https:" && x.hostname === "github.com" && !x.username && !x.password && x.pathname.startsWith(`/${OWNER}/`) ? x.href : null;
+  } catch { return null; }
+}
 
 async function getJSON(path) {
   try { const r = await fetch(path + bust(), {cache: "no-store"}); return r.ok ? await r.json() : null; }
@@ -224,7 +231,7 @@ async function refresh() {
           <div class="task">${esc(a.task) || '<span class="empty">no task</span>'}</div>
           <div class="meta">${a.reviewed_by ? "Reviewed by " + esc(a.reviewed_by) : ""}${a.reviews_for ? "Reviews for " + esc(a.reviews_for) : ""}</div>
           <div class="meta">Updated ${esc(ago(a.updated))}${old ? ' <span class="stale">(stale?)</span>' : ""}
-            ${a.link ? ` &middot; <a href="${esc(a.link)}" target="_blank" rel="noopener">link</a>` : ""}</div>
+            ${safeLink(a.link) ? ` &middot; <a href="${esc(safeLink(a.link))}" target="_blank" rel="noopener noreferrer">link</a>` : ""}</div>
           ${a.needs_john ? `<div class="need">Needs you: ${esc(a.needs_john)}</div>` : ""}
         </div>`;
       }).join("")
@@ -234,7 +241,7 @@ async function refresh() {
   const decisions = (await getJSON("decisions.json")) || [];
   const needs = [
     ...decisions.map(d => `<li><b>${esc(d.question)}</b><div class="meta">From ${esc(d.from)} &middot; opened ${esc(ago(d.opened))}
-      ${d.link ? ` &middot; <a href="${esc(d.link)}" target="_blank" rel="noopener">open the issue</a>` : ""}</div></li>`),
+      ${safeLink(d.link) ? ` &middot; <a href="${esc(safeLink(d.link))}" target="_blank" rel="noopener noreferrer">open the issue</a>` : ""}</div></li>`),
     ...agents.filter(a => a.needs_john).map(a => `<li><b>${esc(a.agent)}</b>: ${esc(a.needs_john)}</li>`)
   ];
   $("needs").innerHTML = needs.length ? needs.join("") : '<li class="empty">Nothing waiting for you.</li>';
