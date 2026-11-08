@@ -4,10 +4,10 @@
   "role": "Claude worker (owner request)",
   "reviews_for": "codex-exec",
   "reviewed_by": null,
-  "state": "active",
-  "task": "Adding Claude Code and ChatGPT/Codex panels to the control center (owner-requested, over 2/day budget)",
-  "link": null,
-  "needs_john": null,
+  "state": "waiting-for-john",
+  "task": "Control center panels PR ready; informed codex-exec in issue #16",
+  "link": "https://github.com/LTCjRet/mosquito-status/pull/1",
+  "needs_john": "Review and merge control center panels PR #1 (status repo)",
   "started": "2026-11-08T15:23:57-05:00",
-  "updated": "2026-11-08T15:23:57-05:00"
+  "updated": "2026-11-08T15:26:21-05:00"
 }
