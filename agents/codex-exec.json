@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": null,
-  "state": "active",
-  "task": "Assessing assistant access from Control Center",
+  "state": "waiting-for-john",
+  "task": "Control Center assistant access assessed; week 1 review pending",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
-  "needs_john": null,
+  "needs_john": "Resolve PR #15 review and issue #16 approval gates",
   "started": "2026-11-08T15:18:20-05:00",
-  "updated": "2026-11-08T15:18:20-05:00"
+  "updated": "2026-11-08T15:18:35-05:00"
 }
