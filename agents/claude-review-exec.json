@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Claude launch point verified live on main 713bffc: admitted run reserved/ran/released; paused run blocked (0 turns)",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/23",
-  "needs_john": "Unpause pause.json. Codex launch point still needs its live paused+admitted pair on the PC",
+  "state": "idle",
+  "task": "Claude launch point verified live; Codex launch-point live check filed as #45",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/45",
+  "needs_john": "Tell Codex to carry out issue #45; set pause for its step 2",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T15:41:20-05:00"
+  "updated": "2026-11-09T15:43:44-05:00"
 }
