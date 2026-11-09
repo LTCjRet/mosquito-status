@@ -39,6 +39,24 @@ ul.list li{background:var(--card);border:1px solid var(--line);border-radius:8px
 .count b{font-size:20px;display:block}
 pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;font-size:12px;margin:0}
 .empty{color:var(--muted);font-style:italic}
+.panels{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.panel{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--olive);border-radius:8px;padding:12px 14px;min-width:0}
+.panel h3{margin:0 0 2px;font-size:17px}
+.meter{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0}
+.meter div{font-size:13px;color:var(--muted)}.meter b{font-size:19px;color:var(--ink);margin-right:3px}
+.meter .over b{color:var(--block)}
+.panel .agentline{font-size:13px;padding:4px 0;border-top:1px solid var(--line)}
+.req{margin-top:10px;display:grid;gap:8px}
+.req label{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+.req select,.req input,.req textarea{width:100%;font:inherit;font-size:16px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.req textarea{min-height:60px;resize:vertical}
+[hidden]{display:none!important}
+.btn{display:inline-block;padding:7px 12px;border-radius:6px;border:1px solid var(--olive);background:var(--olive);color:var(--card);font-weight:600;text-decoration:none;cursor:pointer;font-size:14px}
+.btn.secondary{background:transparent;color:var(--olive)}
+.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.warn{font-size:13px;color:var(--wait);margin-top:6px}
 </style>
 </head>
 <body>
@@ -55,16 +73,44 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:8px;paddin
   <h2>Agents</h2>
   <div class="grid" id="agents"></div>
 
+  <h2>Claude Code and ChatGPT</h2>
+  <div class="panels" id="panels"></div>
+  <div class="note">Request buttons open a pre-filled issue in the private code repo. Nothing runs until you press
+    <b>Submit</b> on GitHub, so read the text first. Outsiders can't open issues there.</div>
+
   <h2>Runs today</h2>
   <div class="counts" id="counts"></div>
   <div style="margin-top:8px"><pre id="runlog"></pre></div>
 </main>
 <script>
-const OWNER = "LTCjRet", REPO = "mosquito-status";
+const OWNER = "LTCjRet", REPO = "mosquito-status", CODE_REPO = "mosquito-controller";
+const DAY_LIMIT = 2, WEEK_LIMIT = 10;   // D-030
+// Automatic pickup of requests. Stays false until John approves triggers (issue #16).
+const PICKUP = {claude: false, codex: false};
+const SIDES = {
+  claude: {title: "Claude Code", sub: "Claude Pro \u00b7 cloud Routines", label: "claude-run",
+    apps: [["Open Claude Code", "https://claude.ai/code"]]},
+  codex: {title: "ChatGPT / Codex", sub: "ChatGPT Plus \u00b7 Codex on your PC", label: "codex-run",
+    apps: [["Open Codex", "https://chatgpt.com/codex"], ["Open ChatGPT", "https://chatgpt.com/"]]}
+};
+// Fixed request types only; agents ignore anything else.
+const REQUESTS = [
+  {id: "review-pr", text: "Review a pull request", needsPR: true},
+  {id: "revise-pr", text: "Revise a pull request after review", needsPR: true},
+  {id: "status", text: "Status report (no code changes)", needsPR: false},
+  {id: "task", text: "Task for the executive to assign", needsPR: false}
+];
 const ORDER = {"waiting-for-john":0, "blocked":1, "active":2, "reviewing":3, "idle":4};
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const bust = () => "?t=" + Date.now();
+// Links from status files are shown only if they point to the owner's repos on github.com over HTTPS.
+function safeLink(u) {
+  try {
+    const x = new URL(String(u));
+    return x.protocol === "https:" && x.hostname === "github.com" && !x.username && !x.password && x.pathname.startsWith(`/${OWNER}/`) ? x.href : null;
+  } catch { return null; }
+}
 
 async function getJSON(path) {
   try { const r = await fetch(path + bust(), {cache: "no-store"}); return r.ok ? await r.json() : null; }
@@ -81,9 +127,76 @@ function ago(iso) {
   const h = Math.round(m / 60); if (h < 48) return h + " h ago";
   return Math.round(h / 24) + " days ago";
 }
-function today() {
-  const d = new Date(), p = n => String(n).padStart(2, "0");
-  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+function ymd(d) { const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()); }
+function today() { return ymd(new Date()); }
+function weekDays() {  // Monday of this week through today
+  const d = new Date(), out = [], back = (d.getDay() + 6) % 7;
+  for (let i = back; i >= 0; i--) { const x = new Date(d); x.setDate(d.getDate() - i); out.push(ymd(x)); }
+  return out;
+}
+function countByModel(ls) {
+  const out = {};
+  ls.forEach(l => { const m = (l.split("|")[2] || "").trim().toLowerCase(); if (m) out[m] = (out[m] || 0) + 1; });
+  return out;
+}
+function issueURL(side, req, pr, details) {
+  const s = SIDES[side], r = REQUESTS.find(x => x.id === req);
+  const title = `[${s.label}] ${r.text}${r.needsPR ? " #" + pr : ""}`;
+  const body = [
+    `Request: ${req}`, `Side: ${side}`, r.needsPR ? `PR: #${pr}` : null, "",
+    details ? "Details from John:\n" + details + "\n" : null,
+    "---",
+    `Sent from the Mosquito Control Center. The agent reads pause.json first, counts this against the ${DAY_LIMIT}/day budget (D-030), and acts only on the request type above.`
+  ].filter(x => x !== null).join("\n");
+  const q = new URLSearchParams({title, body, labels: s.label});
+  return `https://github.com/${OWNER}/${CODE_REPO}/issues/new?` + q.toString();
+}
+const FORM = {};  // keeps what John typed across refreshes
+function renderPanels(agents, perDay, perWeek, paused) {
+  $("panels").innerHTML = Object.entries(SIDES).map(([side, s]) => {
+    const mine = agents.filter(a => String(a.model).toLowerCase() === side);
+    const d = perDay[side] || 0, w = perWeek[side] || 0, full = d >= DAY_LIMIT || w >= WEEK_LIMIT;
+    const f = FORM[side] || {req: "review-pr", pr: "", details: ""};
+    const needsPR = REQUESTS.find(r => r.id === f.req).needsPR;
+    return `<div class="panel" data-side="${side}">
+      <h3>${esc(s.title)}</h3><div class="sub">${esc(s.sub)}</div>
+      <div class="meter"><div class="${d > DAY_LIMIT ? "over" : ""}"><b>${d}</b>of ${DAY_LIMIT} today</div>
+        <div class="${w > WEEK_LIMIT ? "over" : ""}"><b>${w}</b>of ${WEEK_LIMIT} this week</div></div>
+      ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((a.state || "idle").replace(/-/g, " "))}
+        &middot; <span class="meta">${esc(ago(a.updated))}</span></div>`).join("") : '<div class="empty">No agents listed right now.</div>'}
+      <div class="req">
+        <div><label for="req-${side}">Ask ${esc(s.title)} to&hellip;</label>
+          <select id="req-${side}" data-f="req">${REQUESTS.map(r => `<option value="${r.id}"${r.id === f.req ? " selected" : ""}>${esc(r.text)}</option>`).join("")}</select></div>
+        <div data-prrow${needsPR ? "" : " hidden"}><label for="pr-${side}">Pull request number</label>
+          <input id="pr-${side}" data-f="pr" inputmode="numeric" placeholder="15" value="${esc(f.pr)}"></div>
+        <div><label for="det-${side}">Details (optional)</label>
+          <textarea id="det-${side}" data-f="details" placeholder="What you want, in a sentence or two">${esc(f.details)}</textarea></div>
+        <div><a class="btn" data-go target="_blank" rel="noopener" href="#">Open request on GitHub</a></div>
+      </div>
+      ${paused ? '<div class="warn">Paused: requests will wait until you unpause.</div>' : ""}
+      ${full ? '<div class="warn">Run budget reached: a new request waits for the next free slot.</div>' : ""}
+      ${PICKUP[side] ? "" : '<div class="note">Automatic pickup is off until you approve triggers (issue #16). Requests queue as issues.</div>'}
+      <div class="links">${s.apps.map(([t, u]) => `<a class="btn secondary" href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div>
+    </div>`;
+  }).join("");
+  document.querySelectorAll(".panel").forEach(wirePanel);
+}
+function wirePanel(el) {
+  const side = el.dataset.side;
+  const update = () => {
+    const f = FORM[side] = {
+      req: el.querySelector('[data-f="req"]').value,
+      pr: el.querySelector('[data-f="pr"]').value.replace(/\D/g, "").slice(0, 6),
+      details: el.querySelector('[data-f="details"]').value.slice(0, 1500)
+    };
+    const r = REQUESTS.find(x => x.id === f.req);
+    el.querySelector("[data-prrow]").hidden = !r.needsPR;
+    const go = el.querySelector("[data-go]"), ok = !r.needsPR || f.pr;
+    go.setAttribute("aria-disabled", ok ? "false" : "true");
+    go.href = ok ? issueURL(side, f.req, f.pr, f.details.trim()) : "#";
+  };
+  el.querySelectorAll("[data-f]").forEach(i => i.addEventListener("input", update));
+  update();
 }
 
 async function listAgents() {
@@ -118,7 +231,7 @@ async function refresh() {
           <div class="task">${esc(a.task) || '<span class="empty">no task</span>'}</div>
           <div class="meta">${a.reviewed_by ? "Reviewed by " + esc(a.reviewed_by) : ""}${a.reviews_for ? "Reviews for " + esc(a.reviews_for) : ""}</div>
           <div class="meta">Updated ${esc(ago(a.updated))}${old ? ' <span class="stale">(stale?)</span>' : ""}
-            ${a.link ? ` &middot; <a href="${esc(a.link)}" target="_blank" rel="noopener">link</a>` : ""}</div>
+            ${safeLink(a.link) ? ` &middot; <a href="${esc(safeLink(a.link))}" target="_blank" rel="noopener noreferrer">link</a>` : ""}</div>
           ${a.needs_john ? `<div class="need">Needs you: ${esc(a.needs_john)}</div>` : ""}
         </div>`;
       }).join("")
@@ -128,7 +241,7 @@ async function refresh() {
   const decisions = (await getJSON("decisions.json")) || [];
   const needs = [
     ...decisions.map(d => `<li><b>${esc(d.question)}</b><div class="meta">From ${esc(d.from)} &middot; opened ${esc(ago(d.opened))}
-      ${d.link ? ` &middot; <a href="${esc(d.link)}" target="_blank" rel="noopener">open the issue</a>` : ""}</div></li>`),
+      ${safeLink(d.link) ? ` &middot; <a href="${esc(safeLink(d.link))}" target="_blank" rel="noopener noreferrer">open the issue</a>` : ""}</div></li>`),
     ...agents.filter(a => a.needs_john).map(a => `<li><b>${esc(a.agent)}</b>: ${esc(a.needs_john)}</li>`)
   ];
   $("needs").innerHTML = needs.length ? needs.join("") : '<li class="empty">Nothing waiting for you.</li>';
@@ -136,8 +249,10 @@ async function refresh() {
   // Runs today
   const log = (await getText("runs/" + today() + ".log")).trim();
   const lines = log ? log.split(/\r?\n/) : [];
-  const per = {};
-  lines.forEach(l => { const m = (l.split("|")[2] || "").trim().toLowerCase(); if (m) per[m] = (per[m] || 0) + 1; });
+  const per = countByModel(lines);
+  const week = (await Promise.all(weekDays().map(d => d === today() ? log : getText("runs/" + d + ".log"))))
+    .join("\n").trim().split(/\r?\n/).filter(Boolean);
+  if (!document.querySelector(".panel :focus")) renderPanels(agents, per, countByModel(week), !!(pause && pause.paused));
   $("counts").innerHTML = ["claude", "codex"].map(m => `<div class="count"><b>${per[m] || 0}</b>${m === "claude" ? "Claude" : "Codex"} runs</div>`).join("");
   $("runlog").textContent = lines.length ? lines.slice(-15).reverse().join("\n") : "No runs logged today.";
 
