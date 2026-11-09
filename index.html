@@ -57,6 +57,27 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:8px;paddin
 .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .note{font-size:12px;color:var(--muted);margin-top:6px}
 .warn{font-size:13px;color:var(--wait);margin-top:6px}
+.limits{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.lim{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:0}
+.lim h3{margin:0 0 6px;font-size:16px}
+.win{margin:8px 0}
+.win .row{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.win .row b{font-size:15px}
+.bar{height:8px;border-radius:4px;background:color-mix(in srgb,var(--line) 70%,transparent);overflow:hidden;margin-top:3px}
+.bar i{display:block;height:100%;background:var(--active)}
+.win.near .bar i{background:var(--wait)}.win.full .bar i{background:var(--block)}
+.win.full .left{color:var(--block);font-weight:700}.win.near .left{color:var(--wait);font-weight:600}
+.grants{font-size:12px;color:var(--muted);margin-top:6px}
+.grants li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.linkbtn{background:none;border:0;padding:0;color:var(--review);cursor:pointer;font:inherit;text-decoration:underline}
+.force{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.force .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+button.btn{font:inherit;font-size:14px;font-weight:600}
+.box{background:var(--card);border:1px solid var(--wait);border-radius:8px;padding:10px 14px;margin-top:12px}
+.box textarea{width:100%;min-height:150px;font:12px/1.4 ui-monospace,Consolas,monospace;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.box input{width:100%;font:inherit;font-size:16px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+details{margin-top:10px;font-size:13px}
+summary{cursor:pointer;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -69,6 +90,33 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:8px;paddin
 
   <h2>Needs your input</h2>
   <ul class="list" id="needs"></ul>
+
+  <h2>Run limits</h2>
+  <div class="limits" id="limits"></div>
+  <div class="note">Runs are counted from the run log. Limits come from <code>budget.json</code>: base limits plus the extra
+    runs you grant below. A 5-hour grant also raises today's and this week's limit; a weekly grant raises only this
+    week's. Agents check all three before starting.</div>
+  <div class="box" id="manual" hidden>
+    <b>Save your grant in budget.json</b>
+    <div class="note">The page can't write to GitHub without a token. Copy the text below, open the editor, replace
+      everything in the file with it, and commit. Click more + buttons first to stack several grants in one commit.</div>
+    <textarea id="manual-json" readonly></textarea>
+    <div class="links"><button class="btn" id="manual-copy" type="button">Copy</button>
+      <a class="btn secondary" id="manual-edit" target="_blank" rel="noopener" href="#">Open budget.json editor</a>
+      <button class="btn secondary" id="manual-cancel" type="button">Discard</button></div>
+  </div>
+  <details id="token-box">
+    <summary>One-tap grants (optional GitHub token)</summary>
+    <div class="note">With a fine-grained GitHub token limited to the <b>mosquito-status</b> repo with
+      <b>Contents: read and write</b>, the + buttons commit to budget.json directly. The token stays in this browser
+      only; it is never put in the page or sent anywhere except api.github.com. Any other page you host on
+      ltcjret.github.io can read browser storage for this site, so use a token scoped to this one repo and a short expiry.</div>
+    <div class="req"><div><label for="token">Token</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></div>
+      <label class="note"><input type="checkbox" id="token-remember"> Remember on this device (otherwise kept for this tab only)</label>
+      <div class="links"><button class="btn" id="token-save" type="button">Save token</button>
+        <button class="btn secondary" id="token-clear" type="button">Forget token</button></div>
+      <div class="note" id="token-state"></div></div>
+  </details>
 
   <h2>Agents</h2>
   <div class="grid" id="agents"></div>
@@ -84,7 +132,11 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:8px;paddin
 </main>
 <script>
 const OWNER = "LTCjRet", REPO = "mosquito-status", CODE_REPO = "mosquito-controller";
-const DAY_LIMIT = 2, WEEK_LIMIT = 10;   // D-030
+// Run limits live in budget.json (D-035). These defaults apply only if the file can't be read.
+const DEFAULT_BUDGET = {base: {claude: {five_hour: 2, day: 4, week: 20}, codex: {five_hour: 2, day: 4, week: 20}}, grants: [], usage: {}};
+const WINDOWS = [["five_hour", "Last 5 hours"], ["day", "Today"], ["week", "This week"]];
+const FIVE_H = 5 * 3600e3, MAX_GRANT = 10, RESERVE_PCT = 80;  // 20% soft reserve (D-008, D-023)
+let BUDGET = DEFAULT_BUDGET, BUDGET_OK = false, PENDING = [], LAST = null;
 // Automatic pickup of requests. Stays false until John approves triggers (issue #16).
 const PICKUP = {claude: false, codex: false};
 const SIDES = {
@@ -139,6 +191,145 @@ function countByModel(ls) {
   ls.forEach(l => { const m = (l.split("|")[2] || "").trim().toLowerCase(); if (m) out[m] = (out[m] || 0) + 1; });
   return out;
 }
+function startOfToday() { const x = new Date(); x.setHours(0, 0, 0, 0); return x.getTime(); }
+function startOfWeek() { const x = new Date(); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - (x.getDay() + 6) % 7); return x.getTime(); }
+function yesterday() { const x = new Date(); x.setDate(x.getDate() - 1); return ymd(x); }
+function nowISO() {  // local time with offset, matching the run-log format
+  const d = new Date(), p = n => String(n).padStart(2, "0"), o = -d.getTimezoneOffset();
+  return ymd(d) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds()) +
+    (o >= 0 ? "+" : "-") + p(Math.floor(Math.abs(o) / 60)) + ":" + p(Math.abs(o) % 60);
+}
+function grantAdd(g) { return Math.max(0, Math.min(MAX_GRANT, Math.floor(Number(g.add) || 0))); }
+// Effective limits for one side: base limits plus grants.
+// A five_hour grant lifts the 5-hour limit for 5 hours from its time, and the limit of the day and week it falls in.
+// A week grant lifts only the limit of the week it falls in.
+function limitsFor(budget, side) {
+  const now = Date.now(), day0 = startOfToday(), week0 = startOfWeek();
+  const b = (budget.base || {})[side] || DEFAULT_BUDGET.base[side];
+  const lim = {five_hour: Number(b.five_hour) || 0, day: Number(b.day) || 0, week: Number(b.week) || 0};
+  const active = [];
+  (budget.grants || []).forEach((g, i) => {
+    const t = Date.parse(g.at), n = grantAdd(g);
+    if (g.side !== side || !t || !n || t > now + 60e3) return;
+    if (g.window === "five_hour") {
+      if (now - t < FIVE_H) { lim.five_hour += n; active.push({g, i, until: t + FIVE_H}); }
+      if (t >= day0) lim.day += n;
+      if (t >= week0) lim.week += n;
+    } else if (g.window === "week" && t >= week0) {
+      lim.week += n; active.push({g, i, until: week0 + 7 * 864e5});
+    }
+  });
+  return {lim, active};
+}
+function until(ms) {
+  const m = Math.max(0, Math.round((ms - Date.now()) / 60000));
+  if (m < 60) return m + " min left";
+  const h = Math.round(m / 60); return h < 48 ? h + " h left" : Math.round(h / 24) + " days left";
+}
+// Runs per side and window, from today's, yesterday's and this week's log lines.
+function usedFor(side, linesToday, linesRecent, linesWeek) {
+  const mine = ls => ls.filter(l => (l.split("|")[2] || "").trim().toLowerCase() === side);
+  const since = Date.now() - FIVE_H;
+  return {
+    five_hour: mine(linesRecent).filter(l => (Date.parse(l.split("|")[0].trim()) || 0) > since).length,
+    day: mine(linesToday).length,
+    week: mine(linesWeek).length
+  };
+}
+function windowHTML(label, used, limit) {
+  const left = limit - used, pct = limit > 0 ? Math.min(100, Math.round(used / limit * 100)) : 100;
+  const cls = left <= 0 ? "full" : left === 1 ? "near" : "";
+  return `<div class="win ${cls}"><div class="row"><span>${esc(label)}</span>
+      <span><b>${used}</b> of ${limit} used &middot; <span class="left">${left > 0 ? left + " left" : left === 0 ? "none left" : -left + " over"}</span></span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div></div>`;
+}
+function usageHTML(u) {
+  if (!u || typeof u !== "object") return '<div class="note">Account usage: not reported yet (add it under "usage" in budget.json).</div>';
+  const part = (k, t) => {
+    const v = Number(u[k]); if (!Number.isFinite(v)) return "";
+    return `<span class="${v >= RESERVE_PCT ? "stale" : ""}">${esc(t)} ${Math.round(v)}% used</span>`;
+  };
+  const parts = [part("five_hour_used_pct", "5-hour"), part("week_used_pct", "week")].filter(Boolean);
+  if (!parts.length) return "";
+  const hot = ["five_hour_used_pct", "week_used_pct"].some(k => Number(u[k]) >= RESERVE_PCT);
+  return `<div class="note">Account usage (as reported${u.as_of ? ", " + esc(ago(u.as_of)) : ""}): ${parts.join(" &middot; ")}</div>
+    ${hot ? '<div class="warn">Inside the 20% reserve: agents pause this subscription until you approve (D-023).</div>' : ""}`;
+}
+function renderLimits(perSide) {
+  const budget = withPending(BUDGET), tok = !!getToken();
+  $("limits").innerHTML = Object.entries(SIDES).map(([side, s]) => {
+    const {lim, active} = limitsFor(budget, side), used = perSide[side];
+    return `<div class="lim"><h3>${esc(s.title)}</h3>
+      ${WINDOWS.map(([k, t]) => windowHTML(t, used[k], lim[k])).join("")}
+      ${active.length ? `<ul class="grants" style="list-style:none;padding:0;margin:6px 0 0">${active.map(a => `<li><span>+${grantAdd(a.g)} ${a.g.window === "week" ? "this week" : "5-hour"}
+          ${a.g.note ? "&middot; " + esc(a.g.note) : ""}</span><span>${esc(until(a.until))}${tok && a.i < (BUDGET.grants || []).length
+          ? ` &middot; <button class="linkbtn" type="button" data-undo="${a.i}">remove</button>` : ""}</span></li>`).join("")}</ul>`
+        : '<div class="grants">No extra runs granted right now.</div>'}
+      ${usageHTML((budget.usage || {})[side])}
+    </div>`;
+  }).join("") + (BUDGET_OK ? "" : '<div class="warn">Could not read budget.json; showing default limits.</div>');
+  document.querySelectorAll("[data-undo]").forEach(b => b.addEventListener("click", () => removeGrant(Number(b.dataset.undo))));
+}
+
+// ---- Grants: written to budget.json, directly with a token or by copy-and-paste ----
+const sameGrant = (a, b) => a.id || b.id ? a.id === b.id : a.at === b.at && a.side === b.side && a.window === b.window;
+function withPending(b) { return Object.assign({}, b, {grants: [...(b.grants || []), ...PENDING]}); }
+function budgetText(b) {
+  const base = JSON.stringify(b.base || DEFAULT_BUDGET.base, null, 2).replace(/\n/g, "\n  ");
+  const grants = (b.grants || []).map(g => "    " + JSON.stringify(g)).join(",\n");
+  const usage = JSON.stringify(b.usage || {}, null, 2).replace(/\n/g, "\n  ");
+  return `{\n  "base": ${base},\n  "grants": [${grants ? "\n" + grants + "\n  " : ""}],\n  "usage": ${usage}\n}\n`;
+}
+function getToken() {
+  try { return sessionStorage.getItem("mc-token") || localStorage.getItem("mc-token") || ""; } catch { return ""; }
+}
+function setToken(t, remember) {
+  try { sessionStorage.removeItem("mc-token"); localStorage.removeItem("mc-token"); } catch {}
+  if (!t) return;
+  try { (remember ? localStorage : sessionStorage).setItem("mc-token", t); } catch {}
+}
+const b64enc = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const b64dec = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, "")), c => c.charCodeAt(0)));
+const API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/budget.json`;
+async function commitBudget(change, message) {  // read the latest file, apply change, write it back
+  const h = {Authorization: "Bearer " + getToken(), Accept: "application/vnd.github+json"};
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const r = await fetch(API + bust(), {headers: h, cache: "no-store"});
+    if (!r.ok) throw new Error("read failed (" + r.status + ")");
+    const f = await r.json(), b = change(JSON.parse(b64dec(f.content)));
+    const w = await fetch(API, {method: "PUT", headers: h, body: JSON.stringify({message, content: b64enc(budgetText(b)), sha: f.sha})});
+    if (w.ok) return b;
+    if (w.status !== 409) throw new Error("write failed (" + w.status + ")");
+  }
+  throw new Error("budget.json changed while saving; try again");
+}
+function flash(msg) { $("token-state").textContent = msg; }
+async function addGrant(side, window) {
+  const g = {id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), side, window, add: 1, at: nowISO(), by: "john"};
+  if (!getToken()) { PENDING.push(g); showManual(); redraw(); return; }
+  try {
+    BUDGET = await commitBudget(b => (b.grants = [...(b.grants || []), g], b),
+      `Grant +1 ${side} run (${window === "week" ? "this week" : "5-hour"})`);
+    BUDGET_OK = true; flash("Saved: +1 " + side + " run at " + new Date().toLocaleTimeString() + ".");
+  } catch (e) { flash("Could not save (" + e.message + "). Check the token, or forget it to use copy-and-paste."); }
+  redraw();
+}
+async function removeGrant(i) {
+  if (!getToken()) return;
+  const g = (BUDGET.grants || [])[i]; if (!g) return;
+  try {
+    BUDGET = await commitBudget(b => (b.grants = (b.grants || []).filter(x => !sameGrant(x, g)), b),
+      `Remove ${g.side} grant from ${g.at}`);
+    flash("Removed grant.");
+  } catch (e) { flash("Could not remove (" + e.message + ")."); }
+  redraw();
+}
+function showManual() {
+  $("manual").hidden = !PENDING.length;
+  $("manual-json").value = budgetText(withPending(BUDGET));
+  $("manual-edit").href = `https://github.com/${OWNER}/${REPO}/edit/main/budget.json`;
+}
+function redraw() { if (LAST) { renderLimits(LAST.used); renderPanels(...LAST.panels); } }
 function issueURL(side, req, pr, details) {
   const s = SIDES[side], r = REQUESTS.find(x => x.id === req);
   const title = `[${s.label}] ${r.text}${r.needsPR ? " #" + pr : ""}`;
@@ -146,22 +337,26 @@ function issueURL(side, req, pr, details) {
     `Request: ${req}`, `Side: ${side}`, r.needsPR ? `PR: #${pr}` : null, "",
     details ? "Details from John:\n" + details + "\n" : null,
     "---",
-    `Sent from the Mosquito Control Center. The agent reads pause.json first, counts this against the ${DAY_LIMIT}/day budget (D-030), and acts only on the request type above.`
+    `Sent from the Mosquito Control Center. The agent reads pause.json first, checks the 5-hour, daily and weekly limits in budget.json (D-035), and acts only on the request type above.`
   ].filter(x => x !== null).join("\n");
   const q = new URLSearchParams({title, body, labels: s.label});
   return `https://github.com/${OWNER}/${CODE_REPO}/issues/new?` + q.toString();
 }
 const FORM = {};  // keeps what John typed across refreshes
-function renderPanels(agents, perDay, perWeek, paused) {
+function renderPanels(agents, used, paused) {
+  const budget = withPending(BUDGET);
   $("panels").innerHTML = Object.entries(SIDES).map(([side, s]) => {
     const mine = agents.filter(a => String(a.model).toLowerCase() === side);
-    const d = perDay[side] || 0, w = perWeek[side] || 0, full = d >= DAY_LIMIT || w >= WEEK_LIMIT;
+    const {lim} = limitsFor(budget, side), u = used[side];
+    const full = WINDOWS.some(([k]) => u[k] >= lim[k]);
     const f = FORM[side] || {req: "review-pr", pr: "", details: ""};
     const needsPR = REQUESTS.find(r => r.id === f.req).needsPR;
     return `<div class="panel" data-side="${side}">
       <h3>${esc(s.title)}</h3><div class="sub">${esc(s.sub)}</div>
-      <div class="meter"><div class="${d > DAY_LIMIT ? "over" : ""}"><b>${d}</b>of ${DAY_LIMIT} today</div>
-        <div class="${w > WEEK_LIMIT ? "over" : ""}"><b>${w}</b>of ${WEEK_LIMIT} this week</div></div>
+      <div class="meter">${WINDOWS.map(([k, t]) => `<div class="${u[k] >= lim[k] ? "over" : ""}"><b>${Math.max(0, lim[k] - u[k])}</b>left ${k === "five_hour" ? "in 5 h" : k === "day" ? "today" : "this week"}</div>`).join("")}</div>
+      <div class="force"><label class="note">Force extra runs (each tap adds one)</label>
+        <div class="row"><button class="btn" type="button" data-grant="five_hour">+1 run now (5-hour)</button>
+          <button class="btn secondary" type="button" data-grant="week">+1 this week</button></div></div>
       ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((a.state || "idle").replace(/-/g, " "))}
         &middot; <span class="meta">${esc(ago(a.updated))}</span></div>`).join("") : '<div class="empty">No agents listed right now.</div>'}
       <div class="req">
@@ -174,7 +369,7 @@ function renderPanels(agents, perDay, perWeek, paused) {
         <div><a class="btn" data-go target="_blank" rel="noopener" href="#">Open request on GitHub</a></div>
       </div>
       ${paused ? '<div class="warn">Paused: requests will wait until you unpause.</div>' : ""}
-      ${full ? '<div class="warn">Run budget reached: a new request waits for the next free slot.</div>' : ""}
+      ${full ? '<div class="warn">Run limit reached: a new request waits for the next free slot, unless you add a run above.</div>' : ""}
       ${PICKUP[side] ? "" : '<div class="note">Automatic pickup is off until you approve triggers (issue #16). Requests queue as issues.</div>'}
       <div class="links">${s.apps.map(([t, u]) => `<a class="btn secondary" href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div>
     </div>`;
@@ -196,6 +391,9 @@ function wirePanel(el) {
     go.href = ok ? issueURL(side, f.req, f.pr, f.details.trim()) : "#";
   };
   el.querySelectorAll("[data-f]").forEach(i => i.addEventListener("input", update));
+  el.querySelectorAll("[data-grant]").forEach(b => b.addEventListener("click", async () => {
+    b.disabled = true; await addGrant(side, b.dataset.grant); b.disabled = false;
+  }));
   update();
 }
 
@@ -246,18 +444,39 @@ async function refresh() {
   ];
   $("needs").innerHTML = needs.length ? needs.join("") : '<li class="empty">Nothing waiting for you.</li>';
 
-  // Runs today
+  // Budget and runs
+  const b = await getJSON("budget.json");
+  BUDGET_OK = !!(b && typeof b === "object"); if (BUDGET_OK) BUDGET = b;
+  // Drop pending copy-and-paste grants once the committed file has them.
+  PENDING = PENDING.filter(p => !(BUDGET.grants || []).some(g => sameGrant(g, p)));
+  const split = t => (t || "").trim().split(/\r?\n/).filter(Boolean);
   const log = (await getText("runs/" + today() + ".log")).trim();
-  const lines = log ? log.split(/\r?\n/) : [];
+  const lines = split(log);
   const per = countByModel(lines);
-  const week = (await Promise.all(weekDays().map(d => d === today() ? log : getText("runs/" + d + ".log"))))
-    .join("\n").trim().split(/\r?\n/).filter(Boolean);
-  if (!document.querySelector(".panel :focus")) renderPanels(agents, per, countByModel(week), !!(pause && pause.paused));
+  const week = split((await Promise.all(weekDays().map(d => d === today() ? log : getText("runs/" + d + ".log")))).join("\n"));
+  const recent = [...split(await getText("runs/" + yesterday() + ".log")), ...lines];
+  const used = {};
+  Object.keys(SIDES).forEach(side => used[side] = usedFor(side, lines, recent, week));
+  LAST = {used, panels: [agents, used, !!(pause && pause.paused)]};
+  renderLimits(used);
+  showManual();
+  if (!document.querySelector(".panel :focus")) renderPanels(...LAST.panels);
   $("counts").innerHTML = ["claude", "codex"].map(m => `<div class="count"><b>${per[m] || 0}</b>${m === "claude" ? "Claude" : "Codex"} runs</div>`).join("");
   $("runlog").textContent = lines.length ? lines.slice(-15).reverse().join("\n") : "No runs logged today.";
 
   $("refreshed").textContent = "updated " + new Date().toLocaleTimeString() + " \u00b7 refreshes every 2 minutes";
 }
+// Token and copy-and-paste controls
+function tokenState() { $("token-state").textContent = getToken() ? "Token saved: + buttons commit directly." : "No token: + buttons give you text to paste."; }
+$("token-save").addEventListener("click", () => { setToken($("token").value.trim(), $("token-remember").checked); $("token").value = ""; tokenState(); redraw(); });
+$("token-clear").addEventListener("click", () => { setToken(""); tokenState(); redraw(); });
+$("manual-copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("manual-json").value); $("manual-copy").textContent = "Copied"; }
+  catch { $("manual-json").select(); $("manual-copy").textContent = "Press Ctrl+C"; }
+  setTimeout(() => $("manual-copy").textContent = "Copy", 2000);
+});
+$("manual-cancel").addEventListener("click", () => { PENDING = []; showManual(); redraw(); });
+tokenState();
 refresh();
 setInterval(refresh, 120000);
 </script>

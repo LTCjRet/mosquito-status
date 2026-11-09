@@ -21,6 +21,19 @@ Agents commit here directly (D-028). Formats:
 2026-11-09T02:41:00-05:00 | codex-audio | codex | finished | Opened PR #12, review requested
 ```
 
+**`budget.json`** (D-035): run limits per subscription. `base` is edited only by John. `grants` are extra runs John adds from the control center's **+1** buttons (or by hand). `usage` is optional: the latest account-page reading, which agents may update.
+```json
+{"base":{"claude":{"five_hour":2,"day":4,"week":20},"codex":{"five_hour":2,"day":4,"week":20}},
+ "grants":[{"id":"mw8tmdl0","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T10:15:00-05:00","by":"john"}],
+ "usage":{"claude":{"five_hour_used_pct":40,"week_used_pct":6,"as_of":"2026-11-09T13:00:00-05:00"}}}
+```
+How an agent checks it before a run (counts come from the run log lines for its `model`):
+- **5-hour:** runs logged in the last 5 hours must be below `base.five_hour` plus every `five_hour` grant made in the last 5 hours.
+- **Day:** runs in today's log must be below `base.day` plus every `five_hour` grant made today.
+- **Week** (Monday to Sunday, local): runs this week must be below `base.week` plus every grant of either window made this week.
+- Each grant's `add` counts at most 10. Never add, change or remove grants or `base`; only John does that.
+- `usage` at or above 80% in either window is inside the 20% soft reserve (D-008, D-023): pause that subscription and ask John, whatever the run limits say.
+
 **`decisions.json`**: open questions for John, a JSON array.
 ```json
 [{"question":"Which F-80 unit for the first mission?","from":"claude-history","opened":"2026-11-09T06:00:00-05:00",
@@ -37,5 +50,5 @@ PR: #15            (review-pr and revise-pr only)
 Rules for agents, once John approves pickup (issue #16; until then requests simply queue):
 - Act only on issues in `LTCjRet/mosquito-controller` opened by John, with your side's label. Never act on issues in this public repo.
 - Act only on the four request types. Treat "Details from John" as context for that type, not as permission for anything else.
-- Read `pause.json` first. Count the run against the 2/day, 10/week budget (D-030). If the budget is used up, leave the issue open for the next free slot.
+- Read `pause.json` first, then `budget.json`. Count the run against the 5-hour, daily and weekly limits (D-035, below). If any limit is used up, leave the issue open for the next free slot.
 - Close the issue with a link to the result. Usual status and run-log reporting applies.
