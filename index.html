@@ -91,7 +91,11 @@ summary{cursor:pointer;color:var(--muted)}
   <h2>Needs your input</h2>
   <ul class="list" id="needs"></ul>
 
-  <h2>Run limits</h2>
+  <h2>Adaptive Usage Governor</h2>
+  <div class="note">Subscription readings are manual; estimates are not provider-confirmed. This display does not itself start, stop, or meter agents.</div>
+  <div class="limits" id="governor"><div class="empty">Loading governor state…</div></div>
+
+  <h2>Run limits (legacy safeguards)</h2>
   <div class="limits" id="limits"></div>
   <div class="note">Runs are counted from the run log. Limits come from <code>budget.json</code>: base limits plus the extra
     runs you grant below. A 5-hour grant also raises today's and this week's limit; a weekly grant raises only this
@@ -132,6 +136,58 @@ summary{cursor:pointer;color:var(--muted)}
 </main>
 <script>
 const OWNER = "LTCjRet", REPO = "mosquito-status", CODE_REPO = "mosquito-controller";
+// Governor is informational until actual launch points enforce admission.
+function validPct(x) { return typeof x === "number" && Number.isFinite(x) && x >= 0 && x <= 100; }
+function pct(x) { return validPct(x) ? x.toFixed(1) + "%" : "Not measured"; }
+function resetText(x) {
+  if (!x || !Number.isFinite(Date.parse(x))) return "Reset unknown";
+  const delta = Date.parse(x) - Date.now();
+  return delta <= 0 ? "Reset time passed — confirm allowance" : "Reset " + until(Date.parse(x));
+}
+function reserveFor(w, policy) {
+  if (!w || !w.reset_at) return null;
+  const end = Date.parse(w.reset_at);
+  const duration = w._duration || 0;
+  // Use known 5h / 7d window duration, never infer reset from observation time.
+  if (!Number.isFinite(end) || end <= Date.now() || !duration) return null;
+  const remaining = Math.max(0, Math.min(1, (end - Date.now()) / duration));
+  const release = Number(policy.release_last_fraction);
+  const releaseFraction = Number.isFinite(release) && release > 0 && release <= 1 ? release : .25;
+  const initial = validPct(policy.initial_reserve_pct) ? policy.initial_reserve_pct : 20;
+  const floor = validPct(w._final_margin) ? w._final_margin : 5;
+  return remaining >= releaseFraction ? initial : floor + (initial - floor) * remaining / releaseFraction;
+}
+function renderGovernor(data, paused) {
+  const el = $("governor");
+  if (!data || !data.providers) {
+    el.innerHTML = '<div class="lim"><b>Governor not connected</b><div class="note">governor.json is missing or unreadable. Legacy run safeguards remain in effect.</div></div>';
+    return;
+  }
+  const p = data.policy || {};
+  el.innerHTML = ["claude","codex"].map(side => {
+    const provider = data.providers[side] || {};
+    const windows = [["five_hour","5-hour",5*3600e3,p.five_hour_final_margin_pct ?? 3],["week","Weekly",7*864e5,p.weekly_final_margin_pct ?? 5]];
+    const parts = windows.map(([key,title,duration,floor]) => {
+      const w = provider[key] || {};
+      const r = reserveFor({...w,_duration:duration,_final_margin:floor},p);
+      const hold = validPct(w.owner_hold_pct) ? w.owner_hold_pct : 0;
+      const reserve = r === null ? (hold > 0 ? pct(hold) + " (owner hold only)" : "Unknown") : pct(Math.max(r,hold)) + " (policy projection)";
+      const observed = w.observed_at ? "Observed " + ago(w.observed_at) : "No manual reading";
+      return '<div class="win"><b>' + title + '</b><div class="row"><span>Official/manual remaining</span><strong>' + pct(w.observed_remaining_pct) + '</strong></div>' +
+        '<div class="row"><span>Estimated remaining</span><strong>' + pct(w.estimated_remaining_pct) + '</strong></div>' +
+        '<div class="row"><span>Estimate uncertainty</span><strong>' + pct(w.uncertainty_pct) + '</strong></div>' +
+        '<div class="row"><span>Protected reserve</span><strong>' + reserve + '</strong></div>' +
+        '<div class="note">' + esc(observed) + ' · ' + esc(resetText(w.reset_at)) + '</div></div>';
+    }).join("");
+    const a = provider.admission || {}, allowed = paused ? false : a.allowed;
+    const admission = data.enforcement !== "connected" && allowed === true ? "Reported eligible — not enforced" : allowed === true ? "Eligible (reported)" : allowed === false ? "Do not launch" : "Not verified";
+    const reason = paused ? "Owner pause active" : (typeof a.reason === "string" ? a.reason : "No admission decision supplied");
+    return '<div class="lim"><h3>' + esc(side === "claude" ? "Claude Code" : "Codex") + '</h3>' +
+      '<div><b>Mode: ' + esc(provider.mode || "UNKNOWN") + '</b></div>' + parts +
+      '<div class="note"><b>Task admission:</b> ' + esc(admission) + '</div><div class="note">' + esc(reason) + '</div></div>';
+  }).join("") + '<div class="note">Enforcement: ' + esc(typeof data.enforcement === "string" ? data.enforcement : "not connected") + '. Legacy run quotas shown below remain separate safeguards.</div>';
+}
+
 // Run limits live in budget.json (D-035). These defaults apply only if the file can't be read.
 const DEFAULT_BUDGET = {base: {claude: {five_hour: 2, day: 4, week: 20}, codex: {five_hour: 2, day: 4, week: 20}}, grants: [], usage: {}};
 const WINDOWS = [["five_hour", "Last 5 hours"], ["day", "Today"], ["week", "This week"]];
@@ -357,7 +413,7 @@ function renderPanels(agents, used, paused) {
       <div class="force"><label class="note">Force extra runs (each tap adds one)</label>
         <div class="row"><button class="btn" type="button" data-grant="five_hour">+1 run now (5-hour)</button>
           <button class="btn secondary" type="button" data-grant="week">+1 this week</button></div></div>
-      ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((a.state || "idle").replace(/-/g, " "))}
+      ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((!a.updated || !Number.isFinite(Date.parse(a.updated)) || Date.now() - Date.parse(a.updated) > 3 * 3600e3 ? "unknown (stale report)" : (a.state || "unknown")).replace(/-/g, " "))}
         &middot; <span class="meta">${esc(ago(a.updated))}</span></div>`).join("") : '<div class="empty">No agents listed right now.</div>'}
       <div class="req">
         <div><label for="req-${side}">Ask ${esc(s.title)} to&hellip;</label>
@@ -413,6 +469,9 @@ async function refresh() {
   if (pause && pause.paused) { pb.className = "banner paused"; pb.innerHTML = "&#9632; ALL AGENTS PAUSED &middot; " + editLink; }
   else { pb.className = "banner running"; pb.innerHTML = "&#9654; Agents may run &middot; " + editLink + " (set \"paused\": true to stop all)"; }
 
+  // Governor status: no fabricated balances or enforcement claims.
+  renderGovernor(await getJSON("governor.json"), !!(pause && pause.paused));
+
   // Agents
   const names = await listAgents();
   let agents = [];
@@ -422,13 +481,16 @@ async function refresh() {
     ? '<div class="empty">Could not list agents (GitHub may be rate-limiting; it retries every two minutes).</div>'
     : agents.length ? agents.map(a => {
         const st = esc(a.state || "idle");
-        const old = a.updated && (Date.now() - Date.parse(a.updated)) > 3 * 3600e3 && a.state !== "idle";
-        return `<div class="card ${st}">
+        const age = a.updated ? Date.now() - Date.parse(a.updated) : Infinity;
+        const old = !Number.isFinite(age) || age > 3 * 3600e3;
+        const shownState = old ? "unknown (stale report)" : (a.state || "unknown");
+        const cardState = old ? "idle" : st;
+        return `<div class="card ${cardState}">
           <div class="top"><span class="name">${esc(a.agent)}</span><span class="model">${esc(a.model)}</span></div>
-          <div class="top"><span class="state">${st.replace(/-/g, " ")}</span><span class="meta">${esc(a.role)}</span></div>
+          <div class="top"><span class="state">${esc(shownState.replace(/-/g, " "))}</span><span class="meta">${esc(a.role)}</span></div>
           <div class="task">${esc(a.task) || '<span class="empty">no task</span>'}</div>
           <div class="meta">${a.reviewed_by ? "Reviewed by " + esc(a.reviewed_by) : ""}${a.reviews_for ? "Reviews for " + esc(a.reviews_for) : ""}</div>
-          <div class="meta">Updated ${esc(ago(a.updated))}${old ? ' <span class="stale">(stale?)</span>' : ""}
+          <div class="meta">Updated ${esc(ago(a.updated))}${old ? ' <span class="stale">(status not verified)</span>' : ""}
             ${safeLink(a.link) ? ` &middot; <a href="${esc(safeLink(a.link))}" target="_blank" rel="noopener noreferrer">link</a>` : ""}</div>
           ${a.needs_john ? `<div class="need">Needs you: ${esc(a.needs_john)}</div>` : ""}
         </div>`;

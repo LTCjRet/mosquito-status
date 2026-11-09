@@ -52,3 +52,13 @@ Rules for agents, once John approves pickup (issue #16; until then requests simp
 - Act only on the four request types. Treat "Details from John" as context for that type, not as permission for anything else.
 - Read `pause.json` first, then `budget.json`. Count the run against the 5-hour, daily and weekly limits (D-035, below). If any limit is used up, leave the issue open for the next free slot.
 - Close the issue with a link to the result. Usual status and run-log reporting applies.
+
+## Adaptive Usage Governor display (Issue #23)
+
+`governor.json` is **public, informational telemetry only**. It does not meter subscriptions or enforce scheduler admission. Owner-approved coordinators may update non-sensitive readings and estimates; only the owner may set or change explicit owner holds or policy. Never publish authentication tokens, subscription identifiers, account email addresses, private prompts, or personal usage histories.
+
+`schema_version` is currently 1. `providers.codex` and `providers.claude` each contain `five_hour` and `week` objects with `observed_remaining_pct`, `estimated_remaining_pct`, `uncertainty_pct`, `observed_at`, `reset_at`, and `owner_hold_pct`. Each provider also has `mode` and `admission` (`allowed` true/false/null and a plain-language `reason`). Null means **not measured**, not zero. All percentage values must be numbers in [0,100]. Timestamps use ISO 8601 with a timezone.
+
+`policy` defines `initial_reserve_pct`, `release_last_fraction`, and separate final safety margins for the five-hour and weekly windows. The displayed reserve is a **projection based on reported reset times**, not provider-confirmed remaining capacity. An explicit owner hold is never released automatically. If reset time or usage is unknown, show unknown rather than invent a reading.
+
+`enforcement: "not-connected"` is intentional until real agent launch-point preflight checks are implemented and verified. Existing `budget.json` run limits remain in force. A counted run is not a measure of actual subscription usage. Review, test, and approve governor changes through the established owner-controlled PR workflow.
