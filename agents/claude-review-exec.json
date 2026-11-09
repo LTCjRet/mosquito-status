@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "PR #40 merged (48a1061): rejected status-repo pushes now report git's reason. Live admitted check still pending",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/40",
-  "needs_john": "Create the Routine in the app with BOTH repos + 'Mosquito governor check' env; send fresh Claude 5-hour numbers",
+  "task": "Live check found multi-repo Routines bypass the repo hook; fix ready in PR #42 (env setup script installs user-level hooks)",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/42",
+  "needs_john": "Review/merge PR #42; add its script as the 'Mosquito governor check' environment's setup script; keep the Routine disabled until rechecked",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T13:59:10-05:00"
+  "updated": "2026-11-09T14:20:39-05:00"
 }
