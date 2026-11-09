@@ -142,7 +142,7 @@ function pct(x) { return validPct(x) ? x.toFixed(1) + "%" : "Not measured"; }
 function resetText(x) {
   if (!x || !Number.isFinite(Date.parse(x))) return "Reset unknown";
   const delta = Date.parse(x) - Date.now();
-  return delta <= 0 ? "Reset time passed — confirm allowance" : "Resets in " + until(Date.parse(x));
+  return delta <= 0 ? "Reset time passed — confirm allowance" : "Reset " + until(Date.parse(x));
 }
 function reserveFor(w, policy) {
   if (!w || !w.reset_at) return null;
@@ -181,11 +181,11 @@ function renderGovernor(data, paused) {
     }).join("");
     const a = provider.admission || {}, allowed = paused ? false : a.allowed;
     const admission = data.enforcement !== "connected" && allowed === true ? "Reported eligible — not enforced" : allowed === true ? "Eligible (reported)" : allowed === false ? "Do not launch" : "Not verified";
-    const reason = paused ? "Owner pause active" : (a.reason || "No admission decision supplied");
+    const reason = paused ? "Owner pause active" : (typeof a.reason === "string" ? a.reason : "No admission decision supplied");
     return '<div class="lim"><h3>' + esc(side === "claude" ? "Claude Code" : "Codex") + '</h3>' +
       '<div><b>Mode: ' + esc(provider.mode || "UNKNOWN") + '</b></div>' + parts +
       '<div class="note"><b>Task admission:</b> ' + esc(admission) + '</div><div class="note">' + esc(reason) + '</div></div>';
-  }).join("") + '<div class="note">Enforcement: ' + esc(data.enforcement || "not connected") + '. Legacy run quotas shown below remain separate safeguards.</div>';
+  }).join("") + '<div class="note">Enforcement: ' + esc(typeof data.enforcement === "string" ? data.enforcement : "not connected") + '. Legacy run quotas shown below remain separate safeguards.</div>';
 }
 
 // Run limits live in budget.json (D-035). These defaults apply only if the file can't be read.
@@ -413,7 +413,7 @@ function renderPanels(agents, used, paused) {
       <div class="force"><label class="note">Force extra runs (each tap adds one)</label>
         <div class="row"><button class="btn" type="button" data-grant="five_hour">+1 run now (5-hour)</button>
           <button class="btn secondary" type="button" data-grant="week">+1 this week</button></div></div>
-      ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((a.state || "idle").replace(/-/g, " "))}
+      ${mine.length ? mine.map(a => `<div class="agentline"><b>${esc(a.agent)}</b> &middot; ${esc((!a.updated || !Number.isFinite(Date.parse(a.updated)) || Date.now() - Date.parse(a.updated) > 3 * 3600e3 ? "unknown (stale report)" : (a.state || "unknown")).replace(/-/g, " "))}
         &middot; <span class="meta">${esc(ago(a.updated))}</span></div>`).join("") : '<div class="empty">No agents listed right now.</div>'}
       <div class="req">
         <div><label for="req-${side}">Ask ${esc(s.title)} to&hellip;</label>
