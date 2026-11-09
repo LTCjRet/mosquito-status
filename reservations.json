@@ -30,6 +30,21 @@
       "status": "released",
       "released_at": "2026-11-09T09:50:11+00:00",
       "actual": null
+    },
+    {
+      "id": "20261109T194505-f74a15",
+      "provider": "claude",
+      "agent": "claude-routine-check",
+      "task": "test",
+      "created_at": "2026-11-09T19:45:05+00:00",
+      "expires_at": "2026-11-09T20:15:05+00:00",
+      "reserved": {
+        "five_hour": 3.0,
+        "week": 2.0
+      },
+      "status": "open",
+      "released_at": null,
+      "actual": null
     }
   ]
 }

@@ -22,3 +22,4 @@
 2026-11-09T05:46:04-05:00 | claude-review-exec | claude | finished | Owner-requested: live governor hook check; blocked run passed (prompt refused before any model work); admitted run pending readings
 2026-11-09T13:59:00-05:00 | codex-exec | codex | finished | PR #40 bb6f2aa APPROVE: Windows 695 tests OK, 14 skipped; verdict posted after owner merge during tests. PR #37 status cleaned up. No model launch or automation enabled.
 2026-11-09T14:14:52-05:00 | claude-routine-check | claude | finished | Live-check Routine ran ungoverned (multi-repo session started outside the repo hook); no reservation. Fix: PR #42
+2026-11-09T19:45:05+00:00 | claude-routine-check | claude | admitted | reservation=20261109T194505-f74a15
