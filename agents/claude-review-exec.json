@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Opened governor preflight PR #27 (check/reserve/release/meter, git CAS); 24 new tests, full suite OK",
+  "state": "reviewing",
+  "task": "Fixed Codex HOLD findings 1-7 on governor PR #27 at 0ecf4bb; awaiting Codex re-review and Windows run",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/27",
-  "needs_john": "Codex review, then owner merge of PR #27. Scheduling stays off until launch points are wired and verified",
+  "needs_john": "None now. After Codex re-review and Windows evidence: merge decision on PR #27",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T02:09:08-05:00"
+  "updated": "2026-11-09T02:22:16-05:00"
 }
