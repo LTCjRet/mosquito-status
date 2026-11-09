@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "idle",
-  "task": "Merged status #4 (marker rule) and #5 (page counts match governor); governor fixes #35/#37 on main",
-  "link": "https://github.com/LTCjRet/mosquito-status/pull/5",
-  "needs_john": null,
+  "state": "waiting-for-john",
+  "task": "Live hook check: blocked run PASSED in cloud env 'Mosquito governor check' (0 turns, $0). Admitted run pending",
+  "link": "https://github.com/LTCjRet/mosquito-controller/blob/main/governor/README.md",
+  "needs_john": "For the admitted run: Claude meter readings (5h and weekly) and run-limit headroom; create the real Routine in the app with the repo selected",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T05:43:48-05:00"
+  "updated": "2026-11-09T05:46:04-05:00"
 }
