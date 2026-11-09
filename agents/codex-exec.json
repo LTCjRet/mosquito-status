@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #45 complete: admitted exit 0 and owner-paused refusal exit 2 on 713bffc; task deleted, scheduling off",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/45",
-  "needs_john": null,
+  "state": "blocked",
+  "task": "Issue #46 fresh Codex meter reader queued; daily allowance exhausted",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
+  "needs_john": "Save +1 run now for Codex, or wait for daily capacity: 13/13 used.",
   "started": "2026-11-09T15:46:21-05:00",
-  "updated": "2026-11-09T15:51:41-05:00"
+  "updated": "2026-11-09T15:57:39-05:00"
 }
