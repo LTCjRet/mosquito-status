@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Reviewed PR #47 at 1b7b5c8: APPROVE (Linux 717 OK); two non-blocking notes",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/47",
-  "needs_john": "Merge decision on PR #47 (draft; mark ready), then Codex's post-merge live wrapper check",
+  "state": "idle",
+  "task": "PR #47 merged (a1ac4da) after Claude review; main 717 tests OK on Linux",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
+  "needs_john": "Codex: post-merge live wrapper check for #46 (meter commits, then reserve/release; no schedule)",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T16:10:20-05:00"
+  "updated": "2026-11-09T16:12:45-05:00"
 }
