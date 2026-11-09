@@ -1,8 +1,21 @@
 {
   "base": {
-    "claude": {"five_hour": 2, "day": 4, "week": 20},
-    "codex": {"five_hour": 2, "day": 4, "week": 20}
+    "claude": {
+      "five_hour": 2,
+      "day": 4,
+      "week": 20
+    },
+    "codex": {
+      "five_hour": 2,
+      "day": 4,
+      "week": 20
+    }
   },
-  "grants": [],
+  "grants": [
+    {"id":"mw92n0vb8u1o","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:13-05:00","by":"john"},
+    {"id":"mw92n1g7ylgy","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:14-05:00","by":"john"},
+    {"id":"mw92rc11qp6b","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:34-05:00","by":"john"},
+    {"id":"mw92rchgwlwf","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:35-05:00","by":"john"}
+  ],
   "usage": {}
 }
