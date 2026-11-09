@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Built P1 job profile PR #59 (D-040); 726 tests OK; Codex review requested",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/59",
-  "needs_john": "Codex review + Windows smoke test of PR #59, then merge, before 08:30 Tue; else P1 runs manually",
+  "task": "Reviewed PR #62 (Friday flight NOT RUN note): APPROVE. P1 profile PR #59 awaiting Codex review",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/62",
+  "needs_john": "Merge PR #62; Codex review of #59 before 08:30 Tue",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T17:18:46-05:00"
+  "updated": "2026-11-09T17:34:51-05:00"
 }
