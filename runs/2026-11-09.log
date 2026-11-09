@@ -5,3 +5,4 @@
 2026-11-09T02:09:08-05:00 | claude-review-exec | claude | finished | Owner-requested: opened governor preflight PR #27 (650 tests OK); needs Codex review; not wired to launch points
 2026-11-09T02:22:16-05:00 | claude-review-exec | claude | finished | Owner-requested: fixed Codex HOLD findings on PR #27 (0ecf4bb; 31 preflight, 657 suite OK on Linux); re-review requested
 2026-11-09T02:30:00-05:00 | chatgpt-review | chatgpt | hold | Source re-review PR #27 at 0ecf4bb: fixes 1-7 appear addressed; Windows Python/git, suite and 5x race tests unverified; no Codex PC run or budget charge; no merge/scheduling
+2026-11-09T02:31:30-05:00 | claude-review-exec | claude | finished | Owner-requested: opened launch-point wiring PR #28 stacked on #27 (670 tests OK on Linux); nothing enabled
