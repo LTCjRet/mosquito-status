@@ -1,0 +1,21 @@
+name: Dashboard smoke tests
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'governor.json'
+      - 'tests/dashboard-smoke.cjs'
+      - '.github/workflows/dashboard-smoke.yml'
+  push:
+    branches: [main]
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/dashboard-smoke.cjs
