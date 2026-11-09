@@ -12,38 +12,12 @@
     }
   },
   "grants": [
-    {
-      "id": "mw92n0vb8u1o",
-      "side": "codex",
-      "window": "five_hour",
-      "add": 1,
-      "at": "2026-11-09T04:41:13-05:00",
-      "by": "john"
-    },
-    {
-      "id": "mw92n1g7ylgy",
-      "side": "codex",
-      "window": "five_hour",
-      "add": 1,
-      "at": "2026-11-09T04:41:14-05:00",
-      "by": "john"
-    },
-    {
-      "id": "mw92rc11qp6b",
-      "side": "codex",
-      "window": "five_hour",
-      "add": 1,
-      "at": "2026-11-09T04:44:34-05:00",
-      "by": "john"
-    },
-    {
-      "id": "mw92rchgwlwf",
-      "side": "codex",
-      "window": "five_hour",
-      "add": 1,
-      "at": "2026-11-09T04:44:35-05:00",
-      "by": "john"
-    }
+    {"id":"mw92n0vb8u1o","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:13-05:00","by":"john"},
+    {"id":"mw92n1g7ylgy","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:14-05:00","by":"john"},
+    {"id":"mw92rc11qp6b","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:34-05:00","by":"john"},
+    {"id":"mw92rchgwlwf","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:35-05:00","by":"john"},
+    {"id":"mw94ezqc61ru","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T05:30:58-05:00","by":"john"},
+    {"id":"mw94f2o77to9","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T05:31:02-05:00","by":"john"}
   ],
   "usage": {
     "codex": {
@@ -53,3 +27,4 @@
     }
   }
 }
+
