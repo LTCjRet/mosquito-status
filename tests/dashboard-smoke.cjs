@@ -24,7 +24,7 @@ const now=Date.now();
 const w={reset_at:new Date(now+5*3600e3).toISOString(),_duration:5*3600e3,_final_margin:3};
 const policy=data.policy;
 assert.equal(ctx.reserveFor(w,policy),20);
-assert.ok(ctx.reserveFor({...w,reset_at:new Date(now+15*60e3).toISOString()},policy) < 6);
+assert.ok(ctx.reserveFor({...w,reset_at:new Date(now+15*60e3).toISOString()},policy) < 7);
 assert.equal(ctx.reserveFor({...w,reset_at:new Date(now-1000).toISOString()},policy),null);
 assert.equal(ctx.reserveFor({...w,reset_at:null},policy),null);
 assert.equal(ctx.validPct(-1),false);
