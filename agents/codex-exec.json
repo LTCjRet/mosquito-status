@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "PR #42 review queued; daily Codex run allowance exhausted",
+  "state": "reviewing",
+  "task": "Reviewing PR #42 user-level cloud hook at cb279ae",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/42",
-  "needs_john": "Daily count is 10/10. Owner +1 run now grant or next local day required before review.",
-  "started": "2026-11-09T13:56:46-05:00",
-  "updated": "2026-11-09T14:52:41-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T14:58:33-05:00",
+  "updated": "2026-11-09T14:58:33-05:00"
 }
