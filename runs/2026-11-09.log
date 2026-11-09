@@ -7,3 +7,4 @@
 2026-11-09T02:30:00-05:00 | chatgpt-review | chatgpt | hold | Source re-review PR #27 at 0ecf4bb: fixes 1-7 appear addressed; Windows Python/git, suite and 5x race tests unverified; no Codex PC run or budget charge; no merge/scheduling
 2026-11-09T02:31:30-05:00 | claude-review-exec | claude | finished | Owner-requested: opened launch-point wiring PR #28 stacked on #27 (670 tests OK on Linux); nothing enabled
 2026-11-09T04:18:53-05:00 | claude-review-exec | claude | finished | Owner-requested: merged PR #27 (incl. #28 wiring) to main at ee20020; 670 tests OK on Linux; not enforced
+2026-11-09T04:35:17-05:00 | codex-exec | codex | waiting-for-john | Issue #29 pinned Windows tests/review posted; manual scheduler probes await owner pause; no schedule enabled
