@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Issue #45 pinned Windows Task Scheduler admitted/paused launch checks",
+  "state": "waiting-for-john",
+  "task": "Issue #45 admitted Task Scheduler check passed; waiting for owner pause to test refusal",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/45",
-  "needs_john": null,
+  "needs_john": "Set pause.json true for the authorized refusal check; Codex will not change the switch.",
   "started": "2026-11-09T15:46:21-05:00",
-  "updated": "2026-11-09T15:46:21-05:00"
+  "updated": "2026-11-09T15:48:40-05:00"
 }
