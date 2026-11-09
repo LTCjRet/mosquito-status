@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": "claude-review-exec",
+  "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "Issue #46 fresh Codex meter reader queued; daily allowance exhausted",
+  "state": "active",
+  "task": "Issue #46: verify no-model usage reader and implement fresh wrapper meters",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
-  "needs_john": "Save +1 run now for Codex, or wait for daily capacity: 13/13 used.",
-  "started": "2026-11-09T15:46:21-05:00",
-  "updated": "2026-11-09T15:57:39-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T15:59:56-05:00",
+  "updated": "2026-11-09T15:59:56-05:00"
 }
