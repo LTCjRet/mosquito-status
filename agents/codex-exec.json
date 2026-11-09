@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": null,
+  "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Build D-040 P1 job profile, fixture smoke and Friday NOT RUN clarification",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/56",
+  "state": "idle",
+  "task": "P1 consolidated on PR #59: Windows fixes queued #64; Friday line PR #62 review #63; no trigger enabled",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/59#pullrequestreview-5833766254",
   "needs_john": null,
   "started": "2026-11-09T17:07:30-05:00",
-  "updated": "2026-11-09T17:07:30-05:00"
+  "updated": "2026-11-09T17:32:23-05:00"
 }
