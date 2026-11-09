@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "reviewing",
-  "task": "Issue #44: reviewing PR #42 at 21abfc2 and Windows session locks",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/44",
-  "needs_john": null,
+  "state": "waiting-for-john",
+  "task": "PR #42 approved at 21abfc2; issue #44 complete; owner merge and manual cloud verification pending",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/42#pullrequestreview-5832049320",
+  "needs_john": "Decide on PR #42 merge, then verify admitted and owner-paused cloud checks manually; keep schedules off.",
   "started": "2026-11-09T15:10:58-05:00",
-  "updated": "2026-11-09T15:10:58-05:00"
+  "updated": "2026-11-09T15:13:17-05:00"
 }
