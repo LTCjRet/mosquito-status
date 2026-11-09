@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Fixed Codex P1/P2 on PR #42 at 21abfc2 (707 tests OK); fresh Codex review requested in #44",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/42",
-  "needs_john": "Codex review via #44, then merge; then replace both environments' setup scripts with the new version",
+  "task": "PR #42 merged after Codex APPROVE at 21abfc2; main 707 tests OK. Environments still hold the old setup script",
+  "link": "https://github.com/LTCjRet/mosquito-controller/blob/main/governor/cloud/install_user_hook.sh",
+  "needs_john": "Replace the setup script in 'Mosquito governor check' with main's version; delete 'Mosquito governor (enforced)'; then a final paused + admitted Routine run",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T15:07:27-05:00"
+  "updated": "2026-11-09T15:15:54-05:00"
 }
