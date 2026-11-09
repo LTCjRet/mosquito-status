@@ -145,15 +145,17 @@ function resetText(x) {
   return delta <= 0 ? "Reset time passed — confirm allowance" : "Resets in " + until(Date.parse(x));
 }
 function reserveFor(w, policy) {
-  if (!w || !w.reset_at || !w.observed_at) return null;
-  const end = Date.parse(w.reset_at), observed = Date.parse(w.observed_at);
-  const duration = w === undefined ? 0 : (w._duration || 0);
+  if (!w || !w.reset_at) return null;
+  const end = Date.parse(w.reset_at);
+  const duration = w._duration || 0;
   // Use known 5h / 7d window duration, never infer reset from observation time.
-  if (!Number.isFinite(end) || !Number.isFinite(observed) || !duration) return null;
+  if (!Number.isFinite(end) || end <= Date.now() || !duration) return null;
   const remaining = Math.max(0, Math.min(1, (end - Date.now()) / duration));
-  const release = policy.release_last_fraction || .25;
-  const floor = w._final_margin;
-  return remaining >= release ? policy.initial_reserve_pct : floor + (policy.initial_reserve_pct - floor) * remaining / release;
+  const release = Number(policy.release_last_fraction);
+  const releaseFraction = Number.isFinite(release) && release > 0 && release <= 1 ? release : .25;
+  const initial = validPct(policy.initial_reserve_pct) ? policy.initial_reserve_pct : 20;
+  const floor = validPct(w._final_margin) ? w._final_margin : 5;
+  return remaining >= releaseFraction ? initial : floor + (initial - floor) * remaining / releaseFraction;
 }
 function renderGovernor(data, paused) {
   const el = $("governor");
@@ -169,7 +171,7 @@ function renderGovernor(data, paused) {
       const w = provider[key] || {};
       const r = reserveFor({...w,_duration:duration,_final_margin:floor},p);
       const hold = validPct(w.owner_hold_pct) ? w.owner_hold_pct : 0;
-      const reserve = r === null ? "Unknown" : pct(Math.max(r,hold));
+      const reserve = r === null ? (hold > 0 ? pct(hold) + " (owner hold only)" : "Unknown") : pct(Math.max(r,hold)) + " (policy projection)";
       const observed = w.observed_at ? "Observed " + ago(w.observed_at) : "No manual reading";
       return '<div class="win"><b>' + title + '</b><div class="row"><span>Official/manual remaining</span><strong>' + pct(w.observed_remaining_pct) + '</strong></div>' +
         '<div class="row"><span>Estimated remaining</span><strong>' + pct(w.estimated_remaining_pct) + '</strong></div>' +
@@ -178,7 +180,7 @@ function renderGovernor(data, paused) {
         '<div class="note">' + esc(observed) + ' · ' + esc(resetText(w.reset_at)) + '</div></div>';
     }).join("");
     const a = provider.admission || {}, allowed = paused ? false : a.allowed;
-    const admission = allowed === true ? "Eligible (reported)" : allowed === false ? "Do not launch" : "Not verified";
+    const admission = data.enforcement !== "connected" && allowed === true ? "Reported eligible — not enforced" : allowed === true ? "Eligible (reported)" : allowed === false ? "Do not launch" : "Not verified";
     const reason = paused ? "Owner pause active" : (a.reason || "No admission decision supplied");
     return '<div class="lim"><h3>' + esc(side === "claude" ? "Claude Code" : "Codex") + '</h3>' +
       '<div><b>Mode: ' + esc(provider.mode || "UNKNOWN") + '</b></div>' + parts +
@@ -482,7 +484,8 @@ async function refresh() {
         const age = a.updated ? Date.now() - Date.parse(a.updated) : Infinity;
         const old = !Number.isFinite(age) || age > 3 * 3600e3;
         const shownState = old ? "unknown (stale report)" : (a.state || "unknown");
-        return `<div class="card ${st}">
+        const cardState = old ? "idle" : st;
+        return `<div class="card ${cardState}">
           <div class="top"><span class="name">${esc(a.agent)}</span><span class="model">${esc(a.model)}</span></div>
           <div class="top"><span class="state">${esc(shownState.replace(/-/g, " "))}</span><span class="meta">${esc(a.role)}</span></div>
           <div class="task">${esc(a.task) || '<span class="empty">no task</span>'}</div>
