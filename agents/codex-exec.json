@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "PR #47 merged at a1ac4da; issue #46 live wrapper check awaits daily capacity",
+  "state": "active",
+  "task": "Issue #46 post-merge manual Scheduler check on a1ac4da; no manual meter step",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
-  "needs_john": "Save +1 run now for Codex: daily count 14/14; live check needs one admitted run.",
-  "started": "2026-11-09T15:59:56-05:00",
-  "updated": "2026-11-09T16:13:55-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T16:15:09-05:00",
+  "updated": "2026-11-09T16:15:09-05:00"
 }
