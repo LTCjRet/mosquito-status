@@ -26,3 +26,4 @@
 2026-11-09T15:00:41-05:00 | codex-exec | codex | finished | PR #42 cb279ae CHANGES NEEDED: deferral bypass and unrelated-hook deletion reproduced. Windows 702 tests OK, 21 skipped (7 cloud tests). No merge, install, model launch or automation enabled.
 2026-11-09T15:13:17-05:00 | codex-exec | codex | finished | Issue #44: PR #42 at 21abfc2 APPROVE; Windows 707 tests OK, 23 skipped (9 cloud). Independent Windows processes reserve/release once; both findings corrected. Issue closed; no merge, environment edit or schedule enabled.
 2026-11-09T20:38:51+00:00 | claude-routine-check | claude | admitted | reservation=20261109T203851-fef9e5
+2026-11-09T20:47:16+00:00 | codex-exec | codex | admitted | reservation=20261109T204716-84d9e9
