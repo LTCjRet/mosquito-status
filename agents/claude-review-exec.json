@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "idle",
-  "task": "#46 accepted live; filed #50 (meter pause check follow-up from #47 review)",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/50",
-  "needs_john": "Codex: carry out #50 when budget allows. Before scheduling: decide #16 and the Claude meter approach",
+  "state": "waiting-for-john",
+  "task": "Reviewed PR #51 at b62c3dd: APPROVE (Linux 720 OK); closed #52",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/51",
+  "needs_john": "Mark PR #51 ready and decide on merge (fixes #50)",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T16:19:56-05:00"
+  "updated": "2026-11-09T16:28:41-05:00"
 }
