@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Live check PASSED: multi-repo Routine reserved, pushed, ran and released (19:45 UTC). Setup-script fix PR #42 awaits Codex review",
+  "task": "Fixed Codex P1/P2 on PR #42 at 21abfc2 (707 tests OK); fresh Codex review requested in #44",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/42",
-  "needs_john": "Codex review then merge of PR #42; optional paused-run check; delete the duplicate 'Mosquito governor (enforced)' environment",
+  "needs_john": "Codex review via #44, then merge; then replace both environments' setup scripts with the new version",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T14:48:48-05:00"
+  "updated": "2026-11-09T15:07:27-05:00"
 }
