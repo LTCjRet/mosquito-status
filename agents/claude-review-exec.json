@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Live hook check: blocked run PASSED in cloud env 'Mosquito governor check' (0 turns, $0). Admitted run pending",
-  "link": "https://github.com/LTCjRet/mosquito-controller/blob/main/governor/README.md",
-  "needs_john": "For the admitted run: Claude meter readings (5h and weekly) and run-limit headroom; create the real Routine in the app with the repo selected",
+  "task": "Live check: admission passed, reservation push rejected (session lacked status-repo write). Fix for the misleading message: PR #40",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/40",
+  "needs_john": "Create the Routine in the app with BOTH repos + 'Mosquito governor check' env; review/merge PR #40",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T05:46:04-05:00"
+  "updated": "2026-11-09T05:56:42-05:00"
 }
