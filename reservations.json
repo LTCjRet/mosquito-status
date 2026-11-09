@@ -15,6 +15,21 @@
       "status": "released",
       "released_at": "2026-11-09T09:49:07+00:00",
       "actual": null
+    },
+    {
+      "id": "20261109T094956-9532fe",
+      "provider": "codex",
+      "agent": "codex-exec",
+      "task": "status",
+      "created_at": "2026-11-09T09:49:56+00:00",
+      "expires_at": "2026-11-09T11:49:56+00:00",
+      "reserved": {
+        "five_hour": 15.0,
+        "week": 7.0
+      },
+      "status": "open",
+      "released_at": null,
+      "actual": null
     }
   ]
 }
