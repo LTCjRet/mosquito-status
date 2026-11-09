@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "PR #55 (week-1 plan, P1, meter proposals) merged at 96a3fbf; D-040 record PR #58 ready to merge next",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/58",
-  "needs_john": "Merge PR #58 (D-040). P1 job profile must be reviewed before 08:30 Tue",
+  "state": "idle",
+  "task": "D-040 merged (5bdf2b8): week-1 launcher plan, one-shot P1 audit Tue 09:00 ET, Claude meter A",
+  "link": "https://github.com/LTCjRet/mosquito-controller/blob/main/coordination/DECISIONS.md",
+  "needs_john": "Codex: build and request review of the P1 job profile before 08:30 Tue, or run the audit manually",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T17:00:49-05:00"
+  "updated": "2026-11-09T17:01:53-05:00"
 }
