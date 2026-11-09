@@ -4,10 +4,10 @@
   "role": "Governor worker (owner request)",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Reviewed PR #37 at 4dc5d71: approve (closed request #38); status PR #5 updated to match",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/37",
-  "needs_john": "Merge #37, then status #4 and #5",
+  "state": "idle",
+  "task": "Merged status #4 (marker rule) and #5 (page counts match governor); governor fixes #35/#37 on main",
+  "link": "https://github.com/LTCjRet/mosquito-status/pull/5",
+  "needs_john": null,
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T05:41:17-05:00"
+  "updated": "2026-11-09T05:43:48-05:00"
 }

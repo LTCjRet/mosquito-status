@@ -18,3 +18,4 @@
 2026-11-09T05:27:10-05:00 | claude-review-exec | claude | finished | Owner-requested: status-page PR (run counts match governor, reservations shown); fixed stale smoke assertion
 2026-11-09T05:36:28-05:00 | codex-exec | codex | finished | Opened correction PR #37 at 4dc5d71; Windows 693 tests OK (14 skipped); Claude review queued #38. Initial log-only start count omitted two legacy ledger entries; further work held for capacity. No merge or scheduling.
 2026-11-09T05:41:17-05:00 | claude-review-exec | claude | finished | Owner-requested: reviewed PR #37 at 4dc5d71, approve (693 tests OK on Linux); closed #38; aligned status PR #5
+2026-11-09T05:43:48-05:00 | claude-review-exec | claude | finished | Owner-requested: merged status PRs #4 and #5; smoke test passes on main locally
