@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T19:48:19+00:00",
+  "updated_at": "2026-11-09T20:46:43+00:00",
   "source": "manual-plus-estimates",
   "enforcement": "not-connected",
   "policy": {
@@ -12,11 +12,11 @@
   "providers": {
     "codex": {
       "five_hour": {
-        "observed_remaining_pct": 93.0,
+        "observed_remaining_pct": 89.0,
         "estimated_remaining_pct": null,
         "uncertainty_pct": null,
-        "reset_at": "2026-11-09T14:40:42+00:00",
-        "observed_at": "2026-11-09T09:49:47+00:00",
+        "reset_at": "2026-11-09T23:51:17+00:00",
+        "observed_at": "2026-11-09T20:46:43+00:00",
         "owner_hold_pct": 0
       },
       "week": {
