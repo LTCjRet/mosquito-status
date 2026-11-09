@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": "claude-review-exec",
+  "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "Executive planning package queued #54: launcher week 1, Codex pilot, Claude meter proposal",
+  "state": "active",
+  "task": "Issue #54: draft launcher-first week, Codex scheduling pilot and Claude meter rule",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/54",
-  "needs_john": "Daily Codex allowance 17/17 used. Save +1 run now or wait for daily capacity.",
-  "started": "2026-11-09T16:39:31-05:00",
-  "updated": "2026-11-09T16:42:08-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T16:43:36-05:00",
+  "updated": "2026-11-09T16:43:36-05:00"
 }
