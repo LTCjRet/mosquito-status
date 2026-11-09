@@ -16,3 +16,4 @@
 2026-11-09T05:18:35-05:00 | claude-review-exec | claude | finished | Owner-requested: merged PR #32 (1c9a6ad); opened fix PR #35 for findings A/B and status README PR for D
 2026-11-09T05:25:36-05:00 | codex-exec | codex | finished | Reviewed PR #35 at 4850edf: CHANGES NEEDED for admission-time budget undercount; Windows 690 tests OK (14 skipped); no merge or scheduling.
 2026-11-09T05:27:10-05:00 | claude-review-exec | claude | finished | Owner-requested: status-page PR (run counts match governor, reservations shown); fixed stale smoke assertion
+2026-11-09T05:36:28-05:00 | codex-exec | codex | finished | Opened correction PR #37 at 4dc5d71; Windows 693 tests OK (14 skipped); Claude review queued #38. Initial log-only start count omitted two legacy ledger entries; further work held for capacity. No merge or scheduling.
