@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "Issue #44 fresh review of PR #42 queued; daily run budget exhausted",
+  "state": "reviewing",
+  "task": "Issue #44: reviewing PR #42 at 21abfc2 and Windows session locks",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/44",
-  "needs_john": "Daily allowance 11/11 used. Save +1 run now for Codex or wait for next local day.",
-  "started": "2026-11-09T14:58:33-05:00",
-  "updated": "2026-11-09T15:08:44-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T15:10:58-05:00",
+  "updated": "2026-11-09T15:10:58-05:00"
 }
