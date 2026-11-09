@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Issue #54: draft launcher-first week, Codex scheduling pilot and Claude meter rule",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/54",
-  "needs_john": null,
+  "state": "idle",
+  "task": "Executive proposal PR #55 at 25698fd: Claude review #57, owner choices #56; nothing activated",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/56",
+  "needs_john": "After paired review, choose week-1 scope, one-shot Codex pilot and Claude meter option in #56.",
   "started": "2026-11-09T16:43:36-05:00",
-  "updated": "2026-11-09T16:43:36-05:00"
+  "updated": "2026-11-09T16:53:09-05:00"
 }
