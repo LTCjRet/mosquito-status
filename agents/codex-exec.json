@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "PR #53 approved at e73f971 and merged edd4eb5; issue #16 closed; schedules remain off",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/53#pullrequestreview-5833192414",
-  "needs_john": null,
+  "state": "blocked",
+  "task": "Executive planning package queued #54: launcher week 1, Codex pilot, Claude meter proposal",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/54",
+  "needs_john": "Daily Codex allowance 17/17 used. Save +1 run now or wait for daily capacity.",
   "started": "2026-11-09T16:39:31-05:00",
-  "updated": "2026-11-09T16:40:52-05:00"
+  "updated": "2026-11-09T16:42:08-05:00"
 }
