@@ -5,8 +5,8 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Opened status-page PR: run counts match the governor (60 parity cases), reservations shown",
-  "link": "https://github.com/LTCjRet/mosquito-status/pulls",
+  "task": "Opened status-page PR #5: run counts match the governor (60 parity cases), reservations shown",
+  "link": "https://github.com/LTCjRet/mosquito-status/pull/5",
   "needs_john": "Merge order: mosquito-controller #35, then status #4 and the status-page PR",
   "started": "2026-11-09T01:40:00-05:00",
   "updated": "2026-11-09T05:27:10-05:00"
