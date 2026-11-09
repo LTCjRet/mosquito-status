@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Issue #29: pinned Windows tests and governor wiring review",
+  "state": "waiting-for-john",
+  "task": "Issue #29 Windows evidence posted; blocked/admitted manual probes pending",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/29",
-  "needs_john": null,
+  "needs_john": "Set pause true and authorize blocked probe, then unpause for admitted test; budget applies",
   "started": "2026-11-09T04:28:51-05:00",
-  "updated": "2026-11-09T04:28:51-05:00"
+  "updated": "2026-11-09T04:35:17-05:00"
 }
