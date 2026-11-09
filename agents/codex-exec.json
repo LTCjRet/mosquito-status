@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Issue #29: owner-authorized manual blocked probe while paused",
+  "state": "waiting-for-john",
+  "task": "Issue #29 blocked probe passed; admitted probe pending",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/29",
-  "needs_john": null,
+  "needs_john": "Unpause and grant two additional five-hour slots (or wait), then request admitted probe",
   "started": "2026-11-09T04:36:42-05:00",
-  "updated": "2026-11-09T04:36:42-05:00"
+  "updated": "2026-11-09T04:38:47-05:00"
 }
