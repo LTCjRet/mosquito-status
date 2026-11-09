@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Reviewed executive proposal PR #55 at 25698fd: APPROVE with 2 notes; closed #57",
+  "task": "John decided #56: launcher-first approved, P1 approved, Claude meter A. Recorded as D-040 (PR after #55)",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/56",
-  "needs_john": "Decide #56: launcher-first week, one-shot P1 Codex audit, Claude meter A or B",
+  "needs_john": "Merge PR #55, then the D-040 PR. P1 still needs its job profile reviewed before 08:30 Tue",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T16:56:28-05:00"
+  "updated": "2026-11-09T16:59:54-05:00"
 }
