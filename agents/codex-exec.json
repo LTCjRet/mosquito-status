@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #46 draft PR #47: Windows tests passed; Claude Linux review queued #48",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/47",
-  "needs_john": null,
+  "state": "blocked",
+  "task": "PR #47 merged at a1ac4da; issue #46 live wrapper check awaits daily capacity",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
+  "needs_john": "Save +1 run now for Codex: daily count 14/14; live check needs one admitted run.",
   "started": "2026-11-09T15:59:56-05:00",
-  "updated": "2026-11-09T16:06:50-05:00"
+  "updated": "2026-11-09T16:13:55-05:00"
 }
