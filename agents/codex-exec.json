@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": "claude-review-exec",
+  "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Correcting ledger admission-time budget count after PR #35 review",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/35#pullrequestreview-5824528592",
+  "state": "idle",
+  "task": "PR #37 open; Claude review queued in #38; further Codex work awaits capacity",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/37",
   "needs_john": null,
   "started": "2026-11-09T05:33:11-05:00",
-  "updated": "2026-11-09T05:33:11-05:00"
+  "updated": "2026-11-09T05:36:28-05:00"
 }
