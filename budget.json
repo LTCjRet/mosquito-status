@@ -31,7 +31,8 @@
     {"id":"mw952tv3m8ti","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
     {"id":"mw952u3ro5cu","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
     {"id":"mw9of53464iy","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T14:50:57-05:00","by":"john"},
-    {"id":"mw9oi0ezmalx","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T14:53:11-05:00","by":"john"}
+    {"id":"mw9oi0ezmalx","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T14:53:11-05:00","by":"john"},
+    {"id":"mw9on4jpvuzr","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T14:57:10-05:00","by":"john"}
   ],
   "usage": {
     "codex": {
@@ -41,4 +42,3 @@
     }
   }
 }
-
