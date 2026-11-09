@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Governor PR #27 (preflight + wiring from #28) merged to main at ee20020; nothing enforced yet",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/27",
-  "needs_john": "Windows test evidence still owed (Codex HOLD). Live Routine check: init ledger + Claude meter readings first",
+  "task": "Reviewed PR #32 at d50e953: approve for merge; run-log findings A and B to fix before enabling",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/32",
+  "needs_john": "Merge decision on PR #32; follow-up fix for findings A/B before any governed run",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T04:18:53-05:00"
+  "updated": "2026-11-09T05:14:02-05:00"
 }
