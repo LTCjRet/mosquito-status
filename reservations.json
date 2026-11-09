@@ -87,8 +87,8 @@
         "five_hour": 15.0,
         "week": 7.0
       },
-      "status": "open",
-      "released_at": null,
+      "status": "released",
+      "released_at": "2026-11-09T21:16:06+00:00",
       "actual": null
     }
   ]
