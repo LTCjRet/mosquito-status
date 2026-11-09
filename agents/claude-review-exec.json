@@ -1,13 +1,13 @@
 {
   "agent": "claude-review-exec",
   "model": "claude",
-  "role": "Claude worker (owner request)",
+  "role": "Independent cross-reviewer",
   "reviews_for": "codex-exec",
   "reviewed_by": null,
   "state": "waiting-for-john",
-  "task": "Control center panels PR #1 updated with link check; ready for John",
-  "link": "https://github.com/LTCjRet/mosquito-status/pull/1",
-  "needs_john": "Review and merge control center panels PR #1 (status repo)",
-  "started": "2026-11-08T15:23:57-05:00",
-  "updated": "2026-11-08T15:29:24-05:00"
+  "task": "Reviewed governor PR #25 at 8dceefd: request changes, fixes ready in PR #26; approve once #26 is merged into #25",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/25",
+  "needs_john": "Merge PR #26 into the PR #25 branch, then decide on merging #25. Keep scheduling off until the launch-point gate is verified",
+  "started": "2026-11-09T01:40:00-05:00",
+  "updated": "2026-11-09T01:57:32-05:00"
 }
