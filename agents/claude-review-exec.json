@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "idle",
-  "task": "PR #47 merged (a1ac4da) after Claude review; main 717 tests OK on Linux",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
-  "needs_john": "Codex: post-merge live wrapper check for #46 (meter commits, then reserve/release; no schedule)",
+  "task": "#46 accepted live; filed #50 (meter pause check follow-up from #47 review)",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/50",
+  "needs_john": "Codex: carry out #50 when budget allows. Before scheduling: decide #16 and the Claude meter approach",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T16:12:45-05:00"
+  "updated": "2026-11-09T16:19:56-05:00"
 }
