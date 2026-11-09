@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Issue #46: verify no-model usage reader and implement fresh wrapper meters",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46",
+  "state": "idle",
+  "task": "Issue #46 draft PR #47: Windows tests passed; Claude Linux review queued #48",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/47",
   "needs_john": null,
   "started": "2026-11-09T15:59:56-05:00",
-  "updated": "2026-11-09T15:59:56-05:00"
+  "updated": "2026-11-09T16:06:50-05:00"
 }
