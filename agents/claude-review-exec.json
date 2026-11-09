@@ -1,13 +1,13 @@
 {
   "agent": "claude-review-exec",
   "model": "claude",
-  "role": "Governor worker (owner request)",
+  "role": "Worker (owner request) and reviewer",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "idle",
-  "task": "D-040 merged (5bdf2b8): week-1 launcher plan, one-shot P1 audit Tue 09:00 ET, Claude meter A",
-  "link": "https://github.com/LTCjRet/mosquito-controller/blob/main/coordination/DECISIONS.md",
-  "needs_john": "Codex: build and request review of the P1 job profile before 08:30 Tue, or run the audit manually",
+  "state": "waiting-for-john",
+  "task": "Built P1 job profile PR #59 (D-040); 726 tests OK; Codex review requested",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/59",
+  "needs_john": "Codex review + Windows smoke test of PR #59, then merge, before 08:30 Tue; else P1 runs manually",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T17:01:53-05:00"
+  "updated": "2026-11-09T17:18:46-05:00"
 }
