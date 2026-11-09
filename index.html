@@ -271,8 +271,9 @@ function until(ms) {
 }
 // ---- Run counting: mirrors governor/budget.py so the page shows what the governor enforces ----
 // Owner-local day and Monday week in America/New_York (DST included); rolling 5 hours.
-// One run per reservation marker (log lines and ledger entry), at its earliest time;
-// one run per unmarked line; an unreadable line counts now for every side.
+// One run per reservation marker: the ledger's created_at is authoritative; with no
+// ledger entry, the latest of the marker's log times (conservative). One run per
+// unmarked line; an unreadable line counts now for every side.
 const OWNER_TZ = "America/New_York";
 const MARKER_RE = /\breservation=([A-Za-z0-9_-]+)\b/;
 const TS_RE = /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
@@ -309,7 +310,7 @@ function logDates(now) {  // owner dates from min(Monday, yesterday) through tod
 function countRuns(side, logs, entries, now) {
   const starts = windowStarts(now), events = new Map();
   let unreadable = 0;
-  const add = (id, at) => events.set(id, events.has(id) ? Math.min(events.get(id), at) : at);
+  const add = (id, at) => events.set(id, events.has(id) ? Math.max(events.get(id), at) : at);
   for (const [path, text] of Object.entries(logs)) {
     String(text || "").split(/\r?\n/).forEach((line, n) => {
       if (!line.trim()) return;
@@ -324,7 +325,7 @@ function countRuns(side, logs, entries, now) {
   }
   for (const e of Array.isArray(entries) ? entries : []) {
     const at = e && e.provider === side ? parseTs(e.created_at) : null;
-    if (at !== null) add("r|" + e.id, at);
+    if (at !== null) events.set("r|" + e.id, at);  // ledger time is authoritative
   }
   const times = [...events.values()], used = {};
   for (const k of ["five_hour", "day", "week"]) used[k] = times.filter(at => at >= starts[k]).length;
