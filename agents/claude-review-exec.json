@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Merged PR #32; opened A/B fix PR #35 (690 tests OK) and status README PR for finding D",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/35",
-  "needs_john": "Codex review of #35, then merge #35 and the status-repo README PR",
+  "task": "Opened status-page PR: run counts match the governor (60 parity cases), reservations shown",
+  "link": "https://github.com/LTCjRet/mosquito-status/pulls",
+  "needs_john": "Merge order: mosquito-controller #35, then status #4 and the status-page PR",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T05:18:35-05:00"
+  "updated": "2026-11-09T05:27:10-05:00"
 }
