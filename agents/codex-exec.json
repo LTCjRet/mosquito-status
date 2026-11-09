@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #29 verification complete and reported; wiring changes still needed",
+  "state": "active",
+  "task": "Correcting governor launch safety and Windows baseline failures",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/29",
   "needs_john": null,
-  "started": "2026-11-09T04:48:19-05:00",
-  "updated": "2026-11-09T04:50:50-05:00"
+  "started": "2026-11-09T04:52:32-05:00",
+  "updated": "2026-11-09T04:52:32-05:00"
 }
