@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": null,
+  "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #50 draft PR #51 at b62c3dd; Windows passed, Claude Linux review queued #52",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/51",
+  "state": "reviewing",
+  "task": "Reviewing decision-record PR #53 at e73f971; owner authorized merge if approved",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/53",
   "needs_john": null,
-  "started": "2026-11-09T16:21:41-05:00",
-  "updated": "2026-11-09T16:25:29-05:00"
+  "started": "2026-11-09T16:39:31-05:00",
+  "updated": "2026-11-09T16:39:31-05:00"
 }
