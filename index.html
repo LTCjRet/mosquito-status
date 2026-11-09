@@ -92,14 +92,15 @@ summary{cursor:pointer;color:var(--muted)}
   <ul class="list" id="needs"></ul>
 
   <h2>Adaptive Usage Governor</h2>
-  <div class="note">Subscription readings are manual; estimates are not provider-confirmed. This display does not itself start, stop, or meter agents.</div>
+  <div class="note">Meter readings from <code>governor.json</code> drive the governor's capacity check. Readings are manual; estimates are not provider-confirmed. This display does not itself start, stop, or meter agents.</div>
   <div class="limits" id="governor"><div class="empty">Loading governor state…</div></div>
 
-  <h2>Run limits (legacy safeguards)</h2>
+  <h2>Run limits (D-035, checked by the governor)</h2>
   <div class="limits" id="limits"></div>
-  <div class="note">Runs are counted from the run log. Limits come from <code>budget.json</code>: base limits plus the extra
-    runs you grant below. A 5-hour grant also raises today's and this week's limit; a weekly grant raises only this
-    week's. Agents check all three before starting.</div>
+  <div class="note">Counted the way the governor counts: one run per reservation (its log lines and ledger entry
+    together), one per other log line, using New York days and Monday weeks. Limits come from <code>budget.json</code>:
+    base limits plus the extra runs you grant below. A 5-hour grant also raises today's and this week's limit; a weekly
+    grant raises only this week's. The governor also needs capacity in the meter readings above.</div>
   <div class="box" id="manual" hidden>
     <b>Save your grant in budget.json</b>
     <div class="note">The page can't write to GitHub without a token. Copy the text below, open the editor, replace
@@ -160,7 +161,7 @@ function reserveFor(w, policy) {
 function renderGovernor(data, paused) {
   const el = $("governor");
   if (!data || !data.providers) {
-    el.innerHTML = '<div class="lim"><b>Governor not connected</b><div class="note">governor.json is missing or unreadable. Legacy run safeguards remain in effect.</div></div>';
+    el.innerHTML = '<div class="lim"><b>Governor not connected</b><div class="note">governor.json is missing or unreadable. Run limits below still apply.</div></div>';
     return;
   }
   const p = data.policy || {};
@@ -185,14 +186,14 @@ function renderGovernor(data, paused) {
     return '<div class="lim"><h3>' + esc(side === "claude" ? "Claude Code" : "Codex") + '</h3>' +
       '<div><b>Mode: ' + esc(provider.mode || "UNKNOWN") + '</b></div>' + parts +
       '<div class="note"><b>Task admission:</b> ' + esc(admission) + '</div><div class="note">' + esc(reason) + '</div></div>';
-  }).join("") + '<div class="note">Enforcement: ' + esc(typeof data.enforcement === "string" ? data.enforcement : "not connected") + '. Legacy run quotas shown below remain separate safeguards.</div>';
+  }).join("") + '<div class="note">Enforcement: ' + esc(typeof data.enforcement === "string" ? data.enforcement : "not connected") + '. Run limits below are checked separately (D-035).</div>';
 }
 
 // Run limits live in budget.json (D-035). These defaults apply only if the file can't be read.
 const DEFAULT_BUDGET = {base: {claude: {five_hour: 2, day: 4, week: 20}, codex: {five_hour: 2, day: 4, week: 20}}, grants: [], usage: {}};
 const WINDOWS = [["five_hour", "Last 5 hours"], ["day", "Today"], ["week", "This week"]];
 const FIVE_H = 5 * 3600e3, MAX_GRANT = 10, RESERVE_PCT = 80;  // 20% soft reserve (D-008, D-023)
-let BUDGET = DEFAULT_BUDGET, BUDGET_OK = false, PENDING = [], LAST = null;
+let BUDGET = DEFAULT_BUDGET, BUDGET_OK = false, PENDING = [], LAST = null, LEDGER = [];
 // Automatic pickup of requests. Stays false until John approves triggers (issue #16).
 const PICKUP = {claude: false, codex: false};
 const SIDES = {
@@ -236,20 +237,6 @@ function ago(iso) {
   return Math.round(h / 24) + " days ago";
 }
 function ymd(d) { const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()); }
-function today() { return ymd(new Date()); }
-function weekDays() {  // Monday of this week through today
-  const d = new Date(), out = [], back = (d.getDay() + 6) % 7;
-  for (let i = back; i >= 0; i--) { const x = new Date(d); x.setDate(d.getDate() - i); out.push(ymd(x)); }
-  return out;
-}
-function countByModel(ls) {
-  const out = {};
-  ls.forEach(l => { const m = (l.split("|")[2] || "").trim().toLowerCase(); if (m) out[m] = (out[m] || 0) + 1; });
-  return out;
-}
-function startOfToday() { const x = new Date(); x.setHours(0, 0, 0, 0); return x.getTime(); }
-function startOfWeek() { const x = new Date(); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - (x.getDay() + 6) % 7); return x.getTime(); }
-function yesterday() { const x = new Date(); x.setDate(x.getDate() - 1); return ymd(x); }
 function nowISO() {  // local time with offset, matching the run-log format
   const d = new Date(), p = n => String(n).padStart(2, "0"), o = -d.getTimezoneOffset();
   return ymd(d) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds()) +
@@ -260,7 +247,7 @@ function grantAdd(g) { return Math.max(0, Math.min(MAX_GRANT, Math.floor(Number(
 // A five_hour grant lifts the 5-hour limit for 5 hours from its time, and the limit of the day and week it falls in.
 // A week grant lifts only the limit of the week it falls in.
 function limitsFor(budget, side) {
-  const now = Date.now(), day0 = startOfToday(), week0 = startOfWeek();
+  const now = Date.now(), starts = windowStarts(now), day0 = starts.day, week0 = starts.week;
   const b = (budget.base || {})[side] || DEFAULT_BUDGET.base[side];
   const lim = {five_hour: Number(b.five_hour) || 0, day: Number(b.day) || 0, week: Number(b.week) || 0};
   const active = [];
@@ -282,16 +269,68 @@ function until(ms) {
   if (m < 60) return m + " min left";
   const h = Math.round(m / 60); return h < 48 ? h + " h left" : Math.round(h / 24) + " days left";
 }
-// Runs per side and window, from today's, yesterday's and this week's log lines.
-function usedFor(side, linesToday, linesRecent, linesWeek) {
-  const mine = ls => ls.filter(l => (l.split("|")[2] || "").trim().toLowerCase() === side);
-  const since = Date.now() - FIVE_H;
-  return {
-    five_hour: mine(linesRecent).filter(l => (Date.parse(l.split("|")[0].trim()) || 0) > since).length,
-    day: mine(linesToday).length,
-    week: mine(linesWeek).length
-  };
+// ---- Run counting: mirrors governor/budget.py so the page shows what the governor enforces ----
+// Owner-local day and Monday week in America/New_York (DST included); rolling 5 hours.
+// One run per reservation marker (log lines and ledger entry), at its earliest time;
+// one run per unmarked line; an unreadable line counts now for every side.
+const OWNER_TZ = "America/New_York";
+const MARKER_RE = /\breservation=([A-Za-z0-9_-]+)\b/;
+const TS_RE = /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
+const TZ_FMT = new Intl.DateTimeFormat("en-US", {timeZone: OWNER_TZ, hourCycle: "h23", year: "numeric",
+  month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit"});
+function parseTs(s) {
+  s = String(s ?? "").trim();
+  if (!TS_RE.test(s)) return null;
+  const t = Date.parse(s.replace(" ", "T"));
+  return Number.isFinite(t) ? t : null;
 }
+function tzOffset(t) {  // owner wall clock minus UTC at instant t, in ms
+  const p = Object.fromEntries(TZ_FMT.formatToParts(new Date(t)).map(x => [x.type, x.value]));
+  return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - Math.floor(t / 1000) * 1000;
+}
+function ownerDate(t) {
+  const o = new Date(t + tzOffset(t));
+  return {y: o.getUTCFullYear(), m: o.getUTCMonth(), d: o.getUTCDate(), wd: o.getUTCDay()};
+}
+function ownerMidnight(y, m, d) {
+  const wall = Date.UTC(y, m, d);
+  return wall - tzOffset(wall - tzOffset(wall));
+}
+function windowStarts(now) {
+  const {y, m, d, wd} = ownerDate(now), monday = new Date(Date.UTC(y, m, d - (wd + 6) % 7));
+  return {five_hour: now - FIVE_H, day: ownerMidnight(y, m, d),
+          week: ownerMidnight(monday.getUTCFullYear(), monday.getUTCMonth(), monday.getUTCDate())};
+}
+function logDates(now) {  // owner dates from min(Monday, yesterday) through today
+  const {y, m, d, wd} = ownerDate(now), back = Math.max((wd + 6) % 7, 1), out = [];
+  for (let i = back; i >= 0; i--) out.push(new Date(Date.UTC(y, m, d - i)).toISOString().slice(0, 10));
+  return out;
+}
+function countRuns(side, logs, entries, now) {
+  const starts = windowStarts(now), events = new Map();
+  let unreadable = 0;
+  const add = (id, at) => events.set(id, events.has(id) ? Math.min(events.get(id), at) : at);
+  for (const [path, text] of Object.entries(logs)) {
+    String(text || "").split(/\r?\n/).forEach((line, n) => {
+      if (!line.trim()) return;
+      const f = line.split("|").map(x => x.trim());
+      let at = f.length >= 4 ? parseTs(f[0]) : null;
+      if (at === null) { unreadable++; add(`u|${path}|${n}`, now); return; }
+      if (f[2].toLowerCase() !== side) return;
+      if (at > now + 60e3) { unreadable++; at = now; }
+      const mk = line.match(MARKER_RE);
+      add(mk ? "r|" + mk[1] : `l|${path}|${n}`, at);
+    });
+  }
+  for (const e of Array.isArray(entries) ? entries : []) {
+    const at = e && e.provider === side ? parseTs(e.created_at) : null;
+    if (at !== null) add("r|" + e.id, at);
+  }
+  const times = [...events.values()], used = {};
+  for (const k of ["five_hour", "day", "week"]) used[k] = times.filter(at => at >= starts[k]).length;
+  return {used, unreadable};
+}
+// ---- end run counting ----
 function windowHTML(label, used, limit) {
   const left = limit - used, pct = limit > 0 ? Math.min(100, Math.round(used / limit * 100)) : 100;
   const cls = left <= 0 ? "full" : left === 1 ? "near" : "";
@@ -308,15 +347,28 @@ function usageHTML(u) {
   const parts = [part("five_hour_used_pct", "5-hour"), part("week_used_pct", "week")].filter(Boolean);
   if (!parts.length) return "";
   const hot = ["five_hour_used_pct", "week_used_pct"].some(k => Number(u[k]) >= RESERVE_PCT);
-  return `<div class="note">Account usage (as reported${u.as_of ? ", " + esc(ago(u.as_of)) : ""}): ${parts.join(" &middot; ")}</div>
-    ${hot ? '<div class="warn">Inside the 20% reserve: agents pause this subscription until you approve (D-023).</div>' : ""}`;
+  return `<div class="note">Soft-reserve check, <code>usage</code> in budget.json (as reported${u.as_of ? ", " + esc(ago(u.as_of)) : ""}): ${parts.join(" &middot; ")}</div>
+    ${hot ? '<div class="warn">Inside the 20% reserve: the governor refuses this side until you approve (D-023).</div>' : ""}`;
+}
+function ledgerHTML(side) {
+  if (LEDGER === null) return '<div class="warn">reservations.json is missing: the governor refuses every run until it is created with <code>init</code>.</div>';
+  if (!Array.isArray(LEDGER)) return '<div class="warn">reservations.json is unreadable: the governor refuses every run until it is fixed.</div>';
+  const open = LEDGER.filter(e => e && e.provider === side && e.status === "open");
+  if (!open.length) return '<div class="grants">No open reservations.</div>';
+  return `<ul class="grants" style="list-style:none;padding:0;margin:6px 0 0">${open.map(e => {
+    const late = (parseTs(e.expires_at) ?? Infinity) < Date.now();
+    return `<li><span>Running: ${esc(e.agent)} &middot; ${esc(e.task)}</span><span class="${late ? "stale" : ""}">started ${esc(ago(e.created_at))}${
+      late ? " &middot; overdue, still counted until released" : ""}</span></li>`;
+  }).join("")}</ul>`;
 }
 function renderLimits(perSide) {
   const budget = withPending(BUDGET), tok = !!getToken();
   $("limits").innerHTML = Object.entries(SIDES).map(([side, s]) => {
-    const {lim, active} = limitsFor(budget, side), used = perSide[side];
+    const {lim, active} = limitsFor(budget, side), {used, unreadable} = perSide[side];
     return `<div class="lim"><h3>${esc(s.title)}</h3>
       ${WINDOWS.map(([k, t]) => windowHTML(t, used[k], lim[k])).join("")}
+      ${unreadable ? `<div class="warn">${unreadable} run-log line(s) can't be read; each counts as a run for both sides until fixed.</div>` : ""}
+      ${ledgerHTML(side)}
       ${active.length ? `<ul class="grants" style="list-style:none;padding:0;margin:6px 0 0">${active.map(a => `<li><span>+${grantAdd(a.g)} ${a.g.window === "week" ? "this week" : "5-hour"}
           ${a.g.note ? "&middot; " + esc(a.g.note) : ""}</span><span>${esc(until(a.until))}${tok && a.i < (BUDGET.grants || []).length
           ? ` &middot; <button class="linkbtn" type="button" data-undo="${a.i}">remove</button>` : ""}</span></li>`).join("")}</ul>`
@@ -403,7 +455,7 @@ function renderPanels(agents, used, paused) {
   const budget = withPending(BUDGET);
   $("panels").innerHTML = Object.entries(SIDES).map(([side, s]) => {
     const mine = agents.filter(a => String(a.model).toLowerCase() === side);
-    const {lim} = limitsFor(budget, side), u = used[side];
+    const {lim} = limitsFor(budget, side), u = used[side].used;
     const full = WINDOWS.some(([k]) => u[k] >= lim[k]);
     const f = FORM[side] || {req: "review-pr", pr: "", details: ""};
     const needsPR = REQUESTS.find(r => r.id === f.req).needsPR;
@@ -511,19 +563,18 @@ async function refresh() {
   BUDGET_OK = !!(b && typeof b === "object"); if (BUDGET_OK) BUDGET = b;
   // Drop pending copy-and-paste grants once the committed file has them.
   PENDING = PENDING.filter(p => !(BUDGET.grants || []).some(g => sameGrant(g, p)));
-  const split = t => (t || "").trim().split(/\r?\n/).filter(Boolean);
-  const log = (await getText("runs/" + today() + ".log")).trim();
-  const lines = split(log);
-  const per = countByModel(lines);
-  const week = split((await Promise.all(weekDays().map(d => d === today() ? log : getText("runs/" + d + ".log")))).join("\n"));
-  const recent = [...split(await getText("runs/" + yesterday() + ".log")), ...lines];
+  const now = Date.now(), dates = logDates(now), logs = {};
+  (await Promise.all(dates.map(d => getText("runs/" + d + ".log")))).forEach((t, i) => logs["runs/" + dates[i] + ".log"] = t);
+  const ledger = await getJSON("reservations.json");
+  LEDGER = ledger === null ? null : (ledger && Array.isArray(ledger.reservations) ? ledger.reservations : "bad");
+  const lines = (logs["runs/" + dates[dates.length - 1] + ".log"] || "").trim().split(/\r?\n/).filter(Boolean);
   const used = {};
-  Object.keys(SIDES).forEach(side => used[side] = usedFor(side, lines, recent, week));
+  Object.keys(SIDES).forEach(side => used[side] = countRuns(side, logs, Array.isArray(LEDGER) ? LEDGER : [], now));
   LAST = {used, panels: [agents, used, !!(pause && pause.paused)]};
   renderLimits(used);
   showManual();
   if (!document.querySelector(".panel :focus")) renderPanels(...LAST.panels);
-  $("counts").innerHTML = ["claude", "codex"].map(m => `<div class="count"><b>${per[m] || 0}</b>${m === "claude" ? "Claude" : "Codex"} runs</div>`).join("");
+  $("counts").innerHTML = ["claude", "codex"].map(m => `<div class="count"><b>${used[m].used.day}</b>${m === "claude" ? "Claude" : "Codex"} runs</div>`).join("");
   $("runlog").textContent = lines.length ? lines.slice(-15).reverse().join("\n") : "No runs logged today.";
 
   $("refreshed").textContent = "updated " + new Date().toLocaleTimeString() + " \u00b7 refreshes every 2 minutes";
