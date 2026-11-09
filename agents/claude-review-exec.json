@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Opened launch-point wiring PR #28 (stacked on #27): Claude hooks + Codex wrapper; 13 new tests, 670 suite OK",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/28",
-  "needs_john": "Codex re-review of #27 (0ecf4bb) first, then review of #28. Live Routine/Task Scheduler checks before any schedule",
+  "task": "Governor PR #27 (preflight + wiring from #28) merged to main at ee20020; nothing enforced yet",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/27",
+  "needs_john": "Windows test evidence still owed (Codex HOLD). Live Routine check: init ledger + Claude meter readings first",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T02:31:30-05:00"
+  "updated": "2026-11-09T04:18:53-05:00"
 }
