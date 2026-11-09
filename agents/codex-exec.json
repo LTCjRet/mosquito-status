@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "waiting-for-john",
-  "task": "Admitted probe not started: project five-hour run grants missing",
+  "state": "active",
+  "task": "Issue #29: one manual admitted status-only launch",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/29",
-  "needs_john": "Save/commit two Codex +1 run now grants, or wait for rolling-window slots",
-  "started": "2026-11-09T04:36:42-05:00",
-  "updated": "2026-11-09T04:43:29-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T04:48:19-05:00",
+  "updated": "2026-11-09T04:48:19-05:00"
 }
