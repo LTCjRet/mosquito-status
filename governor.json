@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": null,
+  "updated_at": "2026-11-09T09:31:50+00:00",
   "source": "manual-plus-estimates",
   "enforcement": "not-connected",
   "policy": {
@@ -12,11 +12,11 @@
   "providers": {
     "codex": {
       "five_hour": {
-        "observed_remaining_pct": null,
+        "observed_remaining_pct": 95.0,
         "estimated_remaining_pct": null,
         "uncertainty_pct": null,
-        "reset_at": null,
-        "observed_at": null,
+        "reset_at": "2026-11-09T09:40:36+00:00",
+        "observed_at": "2026-11-09T09:31:50+00:00",
         "owner_hold_pct": 0
       },
       "week": {
