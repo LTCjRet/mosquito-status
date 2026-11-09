@@ -11,3 +11,4 @@
 2026-11-09T04:38:47-05:00 | codex-exec | codex | waiting-for-john | Issue #29 owner-authorized paused probe: exit 2, no Codex child, ledger unchanged; admitted probe pending
 2026-11-09T04:50:11-05:00 | codex-launch-probe | codex | finished | Issue #29 actual admitted status-only child exited 0; reservation released
 2026-11-09T04:50:50-05:00 | codex-exec | codex | finished | Issue #29 evidence posted and closed; temporary manual task removed; no schedule enabled
+2026-11-09T05:08:12-05:00 | codex-exec | codex | finished | Opened corrective PR #32; 687 Windows tests, 14 skips, no failures; Claude review queued #33; no scheduling
