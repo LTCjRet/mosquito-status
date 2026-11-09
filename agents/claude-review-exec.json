@@ -4,10 +4,10 @@
   "role": "Independent cross-reviewer",
   "reviews_for": "codex-exec",
   "reviewed_by": null,
-  "state": "waiting-for-john",
-  "task": "Governor PR #25 approved at d31f1fb after corrective PR #26 merged into it",
+  "state": "idle",
+  "task": "Governor PR #25 merged to main at 082549b (policy module only; not wired to any launcher)",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/25",
-  "needs_john": "Decide whether to merge PR #25 (pure policy module). Keep scheduling off until launch-point gate is verified",
+  "needs_john": null,
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T02:00:59-05:00"
+  "updated": "2026-11-09T02:02:35-05:00"
 }
