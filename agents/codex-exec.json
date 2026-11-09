@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "PR #15 revisions complete; fresh Claude review queued",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/15",
-  "needs_john": null,
+  "state": "waiting",
+  "task": "PR #27 re-review: source fixes checked; Windows Codex tests pending",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/27",
+  "needs_john": "Run Windows tests on commit 0ecf4bb; no automation enabled",
   "started": "2026-11-08T15:35:00-05:00",
-  "updated": "2026-11-08T15:38:14-05:00"
+  "updated": "2026-11-09T02:30:00-05:00"
 }
