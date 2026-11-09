@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Reviewed PR #62 (Friday flight NOT RUN note): APPROVE. P1 profile PR #59 awaiting Codex review",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/62",
-  "needs_john": "Merge PR #62; Codex review of #59 before 08:30 Tue",
+  "task": "Mission editor manual incorporated: reader notes PR open (week-2 reader); P1 profile PR #59 awaiting Codex",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pulls",
+  "needs_john": "Codex review of #59 before 08:30 Tue; Codex review of the reader-notes PR",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T17:34:51-05:00"
+  "updated": "2026-11-09T17:40:07-05:00"
 }
