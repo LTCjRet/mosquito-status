@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "updated_at": null,
+  "source": "manual-plus-estimates",
+  "enforcement": "not-connected",
+  "policy": {
+    "initial_reserve_pct": 20,
+    "release_last_fraction": 0.25,
+    "five_hour_final_margin_pct": 3,
+    "weekly_final_margin_pct": 5
+  },
+  "providers": {
+    "codex": {
+      "five_hour": {
+        "observed_remaining_pct": null,
+        "estimated_remaining_pct": null,
+        "uncertainty_pct": null,
+        "reset_at": null,
+        "observed_at": null,
+        "owner_hold_pct": 0
+      },
+      "week": {
+        "observed_remaining_pct": null,
+        "estimated_remaining_pct": null,
+        "uncertainty_pct": null,
+        "reset_at": null,
+        "observed_at": null,
+        "owner_hold_pct": 0
+      },
+      "mode": "NOT CONNECTED",
+      "admission": {
+        "allowed": null,
+        "reason": "No authenticated subscription readings or scheduler preflight integration yet"
+      }
+    },
+    "claude": {
+      "five_hour": {
+        "observed_remaining_pct": null,
+        "estimated_remaining_pct": null,
+        "uncertainty_pct": null,
+        "reset_at": null,
+        "observed_at": null,
+        "owner_hold_pct": 0
+      },
+      "week": {
+        "observed_remaining_pct": null,
+        "estimated_remaining_pct": null,
+        "uncertainty_pct": null,
+        "reset_at": null,
+        "observed_at": null,
+        "owner_hold_pct": 0
+      },
+      "mode": "NOT CONNECTED",
+      "admission": {
+        "allowed": null,
+        "reason": "No authenticated subscription readings or scheduler preflight integration yet"
+      }
+    }
+  }
+}
