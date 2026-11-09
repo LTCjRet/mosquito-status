@@ -4,10 +4,10 @@
   "role": "Manual launch-point verification",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "One admitted status-only child; no automatic trigger",
+  "state": "idle",
+  "task": "Manual status-only child finished; reservation released; no automation enabled",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/29",
   "needs_john": null,
   "started": "2026-11-09T04:49:56-05:00",
-  "updated": "2026-11-09T04:49:56-05:00"
+  "updated": "2026-11-09T04:50:11-05:00"
 }
