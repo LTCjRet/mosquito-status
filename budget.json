@@ -26,7 +26,10 @@
     {"id":"mw9507uwz77e","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:28-05:00","by":"john"},
     {"id":"mw9508588q2l","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
     {"id":"mw9508f0rikp","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
-    {"id":"mw9508qgpc98","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"}
+    {"id":"mw9508qgpc98","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
+    {"id":"mw952tn9rxpz","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
+    {"id":"mw952tv3m8ti","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
+    {"id":"mw952u3ro5cu","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"}
   ],
   "usage": {
     "codex": {
@@ -36,5 +39,3 @@
     }
   }
 }
-
-
