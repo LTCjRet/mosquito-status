@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "PR #35 merged with unresolved review finding; awaiting run-budget capacity",
+  "state": "active",
+  "task": "Correcting ledger admission-time budget count after PR #35 review",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/35#pullrequestreview-5824528592",
-  "needs_john": "Five-hour Codex budget is used up. Add +1 run now or wait for a free slot; admission-time fix still required.",
-  "started": "2026-11-09T05:21:16-05:00",
-  "updated": "2026-11-09T05:28:24-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T05:33:11-05:00",
+  "updated": "2026-11-09T05:33:11-05:00"
 }
