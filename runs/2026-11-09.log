@@ -2,3 +2,4 @@
 2026-11-09T01:57:32-05:00 | claude-review-exec | claude | finished | Reviewed governor PR #25 at 8dceefd: request changes; corrective PR #26 (14/14 governor tests, 626 full suite OK); no merge
 2026-11-09T02:00:59-05:00 | claude-review-exec | claude | finished | Owner-requested: merged PR #26 into #25 branch; approved #25 at d31f1fb (tests OK); #25 not merged
 2026-11-09T02:02:35-05:00 | claude-review-exec | claude | finished | Owner-requested: marked #25 ready and merged to main (082549b); full suite OK on main; scheduling still off
+2026-11-09T02:09:08-05:00 | claude-review-exec | claude | finished | Owner-requested: opened governor preflight PR #27 (650 tests OK); needs Codex review; not wired to launch points

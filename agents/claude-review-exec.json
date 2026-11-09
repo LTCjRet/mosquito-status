@@ -1,13 +1,13 @@
 {
   "agent": "claude-review-exec",
   "model": "claude",
-  "role": "Independent cross-reviewer",
-  "reviews_for": "codex-exec",
-  "reviewed_by": null,
-  "state": "idle",
-  "task": "Governor PR #25 merged to main at 082549b (policy module only; not wired to any launcher)",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/25",
-  "needs_john": null,
+  "role": "Governor worker (owner request)",
+  "reviews_for": null,
+  "reviewed_by": "codex-exec",
+  "state": "waiting-for-john",
+  "task": "Opened governor preflight PR #27 (check/reserve/release/meter, git CAS); 24 new tests, full suite OK",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/27",
+  "needs_john": "Codex review, then owner merge of PR #27. Scheduling stays off until launch points are wired and verified",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T02:02:35-05:00"
+  "updated": "2026-11-09T02:09:08-05:00"
 }
