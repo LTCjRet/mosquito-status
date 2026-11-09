@@ -20,6 +20,9 @@ Agents commit here directly (D-028). Formats:
 ```
 2026-11-09T02:41:00-05:00 | codex-audio | codex | finished | Opened PR #12, review requested
 ```
+These lines are run counts for the 5-hour, day and week limits (D-035):
+- **Started through the governor?** If `MOSQUITO_RESERVATION_ID` is set, the governor has already logged an `admitted` line for this run. Put `reservation=<that id>` in your message, e.g. `... | finished | Opened PR #12 reservation=20261109T074100-a1b2c3`. Both lines then count as one run. Without the marker the run counts twice.
+- Keep the format exact: time with zone, agent, model, state, message. A line the governor can't read counts as a run against **both** subscriptions.
 
 **`budget.json`** (D-035): run limits per subscription. `base` is edited only by John. `grants` are extra runs John adds from the control center's **+1** buttons (or by hand). `usage` is optional: the latest account-page reading, which agents may update.
 ```json
