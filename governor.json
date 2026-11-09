@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-09T09:49:47+00:00",
+  "updated_at": "2026-11-09T09:49:50+00:00",
   "source": "manual-plus-estimates",
   "enforcement": "not-connected",
   "policy": {
@@ -24,7 +24,7 @@
         "estimated_remaining_pct": null,
         "uncertainty_pct": null,
         "reset_at": "2026-11-11T10:07:15+00:00",
-        "observed_at": "2026-11-09T09:48:58+00:00",
+        "observed_at": "2026-11-09T09:49:50+00:00",
         "owner_hold_pct": 0
       },
       "mode": "NOT CONNECTED",
