@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #46 complete: automatic meters -> reserve -> Codex -> release passed on a1ac4da; scheduling off",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/46#issuecomment-6751701259",
+  "state": "active",
+  "task": "Issue #50: correct meter pause check and add fail-safe regression cases",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/50",
   "needs_john": null,
-  "started": "2026-11-09T16:15:09-05:00",
-  "updated": "2026-11-09T16:17:49-05:00"
+  "started": "2026-11-09T16:21:41-05:00",
+  "updated": "2026-11-09T16:21:41-05:00"
 }
