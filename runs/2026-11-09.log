@@ -28,3 +28,4 @@
 2026-11-09T20:38:51+00:00 | claude-routine-check | claude | admitted | reservation=20261109T203851-fef9e5
 2026-11-09T20:47:16+00:00 | codex-exec | codex | admitted | reservation=20261109T204716-84d9e9
 2026-11-09T15:51:41-05:00 | codex-exec | codex | finished | Issue #45 on 713bffc: admitted Scheduler exit 0 with reserve/release; owner-paused exit 2, no child, remote unchanged. Owner restored pause false; temporary task deleted; scheduling off. reservation=20261109T204716-84d9e9
+2026-11-09T16:06:50-05:00 | codex-exec | codex | finished | Issue #46 draft PR #47 at 1b7b5c8: real non-model meter source verified under manual Scheduler; Windows 717 tests OK, 23 skipped. Linux review queued #48; post-merge live wrapper check pending. No schedule enabled.
