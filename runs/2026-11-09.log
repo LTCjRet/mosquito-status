@@ -14,3 +14,4 @@
 2026-11-09T05:08:12-05:00 | codex-exec | codex | finished | Opened corrective PR #32; 687 Windows tests, 14 skips, no failures; Claude review queued #33; no scheduling
 2026-11-09T05:14:02-05:00 | claude-review-exec | claude | finished | Owner-requested: reviewed PR #32 at d50e953 (687 tests OK on Linux); approve, fix A/B before enabling
 2026-11-09T05:18:35-05:00 | claude-review-exec | claude | finished | Owner-requested: merged PR #32 (1c9a6ad); opened fix PR #35 for findings A/B and status README PR for D
+2026-11-09T05:25:36-05:00 | codex-exec | codex | finished | Reviewed PR #35 at 4850edf: CHANGES NEEDED for admission-time budget undercount; Windows 690 tests OK (14 skipped); no merge or scheduling.
