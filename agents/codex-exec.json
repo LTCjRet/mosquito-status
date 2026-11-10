@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Issue #68 review #59 9c5ab4e CHANGES NEEDED: actual Scheduler logging startup fails; no trigger",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/59#pullrequestreview-5835252925",
+  "state": "reviewing",
+  "task": "Issue #69: exact-head fd0567f Windows tests and Scheduler logging smoke",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/69",
   "needs_john": null,
-  "started": "2026-11-09T20:12:38-05:00",
-  "updated": "2026-11-09T20:18:40-05:00"
+  "started": "2026-11-09T20:26:27.969990-05:00",
+  "updated": "2026-11-09T20:26:27.969990-05:00"
 }
