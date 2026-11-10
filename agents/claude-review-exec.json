@@ -4,10 +4,10 @@
   "role": "Worker (owner request) and reviewer",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "active",
-  "task": "Owner override: PR81 (launcher follow-ups) awaiting Codex review; PR74/76/79/80 merged",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/81",
-  "needs_john": null,
+  "state": "waiting-for-john",
+  "task": "All PRs merged (74/76/77/78/79/80/81). Waiting for John to share the reference mission file and its intended use",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/72",
+  "needs_john": "Share the reference mission file (attach/commit/paste) and say how it should be used",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T11:48:21-05:00"
+  "updated": "2026-11-10T11:50:44-05:00"
 }
