@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "PR85 Windows 892 OK; changes requested for route-start false PASS; PR87 provenance docs awaiting paired review",
+  "state": "active",
+  "task": "Owner-authorised FAC integration coordination and local editor/flight validation; PR85 corrected-head Windows run",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/85",
   "needs_john": null,
-  "started": "2026-11-10T13:30:49-05:00",
-  "updated": "2026-11-10T15:42:30-05:00"
+  "started": "2026-11-10T15:46:30-05:00",
+  "updated": "2026-11-10T15:51:00-05:00"
 }
