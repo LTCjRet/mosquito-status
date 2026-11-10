@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "reviewing",
-  "task": "Reviewing PR85 editor-format fix; extracting owner-authorised original ridge reference and trigger chain",
+  "task": "Reviewing PR85 updated mission logic and scene preview; focused Windows and four game-reference checks passed",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/85",
   "needs_john": null,
   "started": "2026-11-10T13:30:49-05:00",
-  "updated": "2026-11-10T13:30:49-05:00"
+  "updated": "2026-11-10T15:40:00-05:00"
 }
