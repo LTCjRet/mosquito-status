@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "waiting-for-john",
-  "task": "Ridge preview editor open/save passed; FAC native input unverified; waiting for owner to start game through Steam for flight validation",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/88",
+  "state": "active",
+  "task": "Game available; preview selection needs manual input; reviewing FAC bridge PR89 failures and running Windows tests",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-10T15:46:30-05:00",
-  "updated": "2026-11-10T15:58:31-05:00"
+  "started": "2026-11-10T16:05:50-05:00",
+  "updated": "2026-11-10T16:08:50-05:00"
 }
