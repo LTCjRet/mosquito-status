@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "waiting-for-john",
-  "task": "Preview loads airborne and timed subtitles execute; awaiting physical smoke observation; PR89 changes requested despite Windows899 OK",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
+  "state": "active",
+  "task": "Adding owner-requested persistent ridge reference marker; editor compilation underway; PR89 revised FAC review",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/90",
   "needs_john": null,
-  "started": "2026-11-10T16:05:50-05:00",
-  "updated": "2026-11-10T16:14:03-05:00"
+  "started": "2026-11-10T16:43:27-05:00",
+  "updated": "2026-11-10T16:50:30-05:00"
 }
