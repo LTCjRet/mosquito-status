@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "PR82 changes needed; Windows11 pass, malformed-input probes fail; awaiting corrected exact head",
+  "state": "waiting-for-john",
+  "task": "Ridge mission intent interview; original narrative preserved, aircraft and player counts awaiting owner choices",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/82",
-  "needs_john": null,
-  "started": "2026-11-10T12:06:22-05:00",
-  "updated": "2026-11-10T12:12:40-05:00"
+  "needs_john": "Answer ridge mission interview: player roles, aircraft choices, human and total aircraft counts",
+  "started": "2026-11-10T12:16:50-05:00",
+  "updated": "2026-11-10T12:17:30-05:00"
 }
