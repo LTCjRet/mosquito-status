@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "P1 profile #59: Codex findings fixed at 9c5ab4e (Job Object tree cleanup, exit 4 on unpublished status); re-review #68. Reader notes #65 awaiting Codex",
+  "task": "P1 profile #59: --log fix pushed at fd0567f; Codex re-review #69. Reader notes #65 (bb94a2c): Claude review queued #67",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/59",
-  "needs_john": "Ask Codex to run #68 (re-review of #59) before 08:30 Tue; Codex review of #65",
+  "needs_john": "Ask Codex to run #69 before 08:30 Tue",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T20:20:00-05:00"
+  "updated": "2026-11-09T20:35:00-05:00"
 }
