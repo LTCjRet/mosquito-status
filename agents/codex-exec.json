@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": "claude-review-exec",
+  "reviews_for": null,
   "reviewed_by": "claude-review-exec",
-  "state": "blocked",
-  "task": "Owner requested Codex corrections to PR #65 reader notes; daily allowance exhausted",
+  "state": "active",
+  "task": "Correct PR #65 authored-landmark and native-anchor documentation; Claude review next",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/65",
-  "needs_john": "Save +1 run now for Codex or wait for daily capacity: 20/20 used.",
-  "started": "2026-11-09T19:58:05-05:00",
-  "updated": "2026-11-09T20:05:07-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T20:06:57-05:00",
+  "updated": "2026-11-09T20:06:57-05:00"
 }
