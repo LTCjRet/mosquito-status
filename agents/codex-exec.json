@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Adding owner-requested persistent ridge reference marker; editor compilation underway; PR89 revised FAC review",
+  "state": "waiting-for-john",
+  "task": "Reference-marker preview compiled, checked and installed separately; awaiting VR visibility check; PR90 final evidence awaiting paired review",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/90",
   "needs_john": null,
   "started": "2026-11-10T16:43:27-05:00",
-  "updated": "2026-11-10T16:50:30-05:00"
+  "updated": "2026-11-10T16:55:00-05:00"
 }
