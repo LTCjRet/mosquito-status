@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "Queue75 merged; checker76 awaits Claude review; meter74 containment findings returned",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/76",
+  "state": "active",
+  "task": "Move approved P1 one-shot to immediate execution and verify outcome",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/69",
   "needs_john": null,
-  "started": "2026-11-10T00:46:16.927380-05:00",
-  "updated": "2026-11-10T01:00:23.534979-05:00"
+  "started": "2026-11-10T01:17:13.607040-05:00",
+  "updated": "2026-11-10T01:17:13.607040-05:00"
 }
