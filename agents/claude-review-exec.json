@@ -4,10 +4,10 @@
   "role": "Worker (owner request) and reviewer",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Mission creation (D-045): PR82 M0 awaiting Codex review; M1 generator ready locally; sample mission with John for editor open/save",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/82",
-  "needs_john": "Open/save the sample Mosquito_M1_test.Mission in the Korea editor and report; answer PR82 questions (map north, country codes, target position, F-80C/F-51D/bunker reference)",
+  "state": "reviewing",
+  "task": "Mission creation: PR84 generator (M1/M1b, callsigns, catalog) at 6217ee7 awaiting Codex re-review; ridge plan holds 12 items pending John editor inspection",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/84",
+  "needs_john": "Editor inspection: target/orbit/airfield positions, map north, payload IDs, event codes, callsign codes; open the sample mission",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T12:06:33-05:00"
+  "updated": "2026-11-10T12:58:17-05:00"
 }
