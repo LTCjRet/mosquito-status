@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "waiting-for-john",
-  "task": "PR70 changes requested; automatic pickup design and paired review queued",
+  "state": "active",
+  "task": "Review PR73; implement disabled durable task queue for automatic pickup",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/71",
-  "needs_john": "Issue71: approve staged subscription-only automatic task pickup; activation remains a separate evidence-bound approval. PR70 needs fix before merge.",
-  "started": "2026-11-09T20:44:43.613254-05:00",
-  "updated": "2026-11-09T20:48:01.436705-05:00"
+  "needs_john": null,
+  "started": "2026-11-09T21:01:34.366927-05:00",
+  "updated": "2026-11-09T21:01:34.366927-05:00"
 }
