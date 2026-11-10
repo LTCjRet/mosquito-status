@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "Ridge PREVIEW with placeholders delivered; waiting for John to substitute real values in the editor and send them back",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/84",
-  "needs_john": "Open Mosquito_Ridge_PREVIEW.Mission in the editor, replace placeholders, save, and send back the values or the saved mission",
+  "task": "Ridge rev3 (original scene, all triggers kept) with John for editor test; PR85 awaiting Codex Windows review",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/85",
+  "needs_john": "Open Mosquito_Ridge_Generated (rev3) in the editor and report",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T13:07:02-05:00"
+  "updated": "2026-11-10T13:44:47-05:00"
 }
