@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Game available; preview selection needs manual input; reviewing FAC bridge PR89 failures and running Windows tests",
+  "state": "waiting-for-john",
+  "task": "Preview loads airborne and timed subtitles execute; awaiting physical smoke observation; PR89 changes requested despite Windows899 OK",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
   "started": "2026-11-10T16:05:50-05:00",
-  "updated": "2026-11-10T16:08:50-05:00"
+  "updated": "2026-11-10T16:14:03-05:00"
 }
