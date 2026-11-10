@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Ridge interview complete; PR83 cooperative definition and event graph under paired review; native generator integration pending",
+  "state": "blocked",
+  "task": "Ridge setup and generator merged; native export held for deferred editor placement and FAC/event integration",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/83",
   "needs_john": null,
-  "started": "2026-11-10T12:16:50-05:00",
-  "updated": "2026-11-10T12:35:24-05:00"
+  "started": "2026-11-10T12:23:22-05:00",
+  "updated": "2026-11-10T13:06:38-05:00"
 }
