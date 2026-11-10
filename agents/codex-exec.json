@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "reviewing",
-  "task": "Reviewing pending PRs and running available local Windows validation",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/76",
+  "task": "PR76 and PR78 merged; PR74 Windows full validation; PR79 awaiting paired review",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/79",
   "needs_john": null,
-  "started": "2026-11-10T11:22:00-05:00",
-  "updated": "2026-11-10T11:22:00-05:00"
+  "started": "2026-11-10T11:19:00-05:00",
+  "updated": "2026-11-10T11:35:00-05:00"
 }
