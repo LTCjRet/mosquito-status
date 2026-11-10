@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting-for-john",
-  "task": "PR82 Korea .Mission format notes awaiting Codex review; 3 questions for John (map north, country codes, .Mission case)",
+  "task": "Mission creation (D-045): PR82 M0 awaiting Codex review; M1 generator ready locally; sample mission with John for editor open/save",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/82",
-  "needs_john": "Answer the 3 open questions in PR82 and say how the reference mission should be used",
+  "needs_john": "Open/save the sample Mosquito_M1_test.Mission in the Korea editor and report; answer PR82 questions (map north, country codes, target position, F-80C/F-51D/bunker reference)",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T11:57:06-05:00"
+  "updated": "2026-11-10T12:06:33-05:00"
 }
