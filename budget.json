@@ -12,56 +12,364 @@
     }
   },
   "grants": [
-    {"id":"mw92n0vb8u1o","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:13-05:00","by":"john"},
-    {"id":"mw92n1g7ylgy","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:41:14-05:00","by":"john"},
-    {"id":"mw92rc11qp6b","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:34-05:00","by":"john"},
-    {"id":"mw92rchgwlwf","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T04:44:35-05:00","by":"john"},
-    {"id":"mw94ezqc61ru","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T05:30:58-05:00","by":"john"},
-    {"id":"mw94f2o77to9","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T05:31:02-05:00","by":"john"},
-    {"id":"mw9506i0sev4","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:26-05:00","by":"john"},
-    {"id":"mw9506t624r2","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:27-05:00","by":"john"},
-    {"id":"mw9507243i1h","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:27-05:00","by":"john"},
-    {"id":"mw9507bw0k2c","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:28-05:00","by":"john"},
-    {"id":"mw9507les71v","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:28-05:00","by":"john"},
-    {"id":"mw9507uwz77e","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:28-05:00","by":"john"},
-    {"id":"mw9508588q2l","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
-    {"id":"mw9508f0rikp","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
-    {"id":"mw9508qgpc98","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:47:29-05:00","by":"john"},
-    {"id":"mw952tn9rxpz","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
-    {"id":"mw952tv3m8ti","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
-    {"id":"mw952u3ro5cu","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T05:49:30-05:00","by":"john"},
-    {"id":"mw9of53464iy","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T14:50:57-05:00","by":"john"},
-    {"id":"mw9oi0ezmalx","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T14:53:11-05:00","by":"john"},
-    {"id":"mw9on4jpvuzr","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T14:57:10-05:00","by":"john"},
-    {"id":"mw9p2zv1rax8","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T15:09:30-05:00","by":"john"},
-    {"id":"mw9p36n1olrq","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T15:09:39-05:00","by":"john"},
-    {"id":"mw9qtkjo49l6","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T15:58:10-05:00","by":"john"},
-    {"id":"mw9rdq74q8d2","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:13:50-05:00","by":"john"},
-    {"id":"mw9rmljcpoqp","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:20:44-05:00","by":"john"},
-    {"id":"mw9rmlwgv7ho","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:20:44-05:00","by":"john"},
-    {"id":"mw9seo9j0nt5","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:42:34-05:00","by":"john"},
-    {"id":"mw9seotv1odz","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:42:35-05:00","by":"john"},
-    {"id":"mw9sepf1oqxo","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T16:42:35-05:00","by":"john"},
-    {"id":"mw9seqcfj74g","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T16:42:37-05:00","by":"john"},
-    {"id":"mw9seqtf9fap","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T16:42:37-05:00","by":"john"},
-    {"id":"mw9ser9147kv","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T16:42:38-05:00","by":"john"},
-    {"id":"mw9znn11f8z6","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:05:29-05:00","by":"john"},
-    {"id":"mw9znnfhk879","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:05:30-05:00","by":"john"},
-    {"id":"mw9znntho8nk","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:05:30-05:00","by":"john"},
-    {"id":"mw9znrs1iful","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T20:05:36-05:00","by":"john"},
-    {"id":"mw9zns23r1e7","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T20:05:36-05:00","by":"john"},
-    {"id":"mw9znsbb9as2","side":"claude","window":"five_hour","add":1,"at":"2026-11-09T20:05:36-05:00","by":"john"},
-    {"id":"mwa0yof1ku4g","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:42:04-05:00","by":"john"},
-    {"id":"mwa0yomav5dq","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:42:04-05:00","by":"john"},
-    {"id":"mwa0yot0lovt","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:42:05-05:00","by":"john"},
-    {"id":"mwa0yp0lcqnt","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:42:05-05:00","by":"john"},
-    {"id":"mwa0yp9j9opz","side":"codex","window":"five_hour","add":1,"at":"2026-11-09T20:42:05-05:00","by":"john"}
+    {
+      "id": "mw92n0vb8u1o",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T04:41:13-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw92n1g7ylgy",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T04:41:14-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw92rc11qp6b",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T04:44:34-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw92rchgwlwf",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T04:44:35-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw94ezqc61ru",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:30:58-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw94f2o77to9",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:31:02-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9506i0sev4",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:26-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9506t624r2",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:27-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9507243i1h",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:27-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9507bw0k2c",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:28-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9507les71v",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:28-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9507uwz77e",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:28-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9508588q2l",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:29-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9508f0rikp",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:29-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9508qgpc98",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:47:29-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw952tn9rxpz",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:49:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw952tv3m8ti",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:49:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw952u3ro5cu",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T05:49:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9of53464iy",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T14:50:57-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9oi0ezmalx",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T14:53:11-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9on4jpvuzr",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T14:57:10-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9p2zv1rax8",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T15:09:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9p36n1olrq",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T15:09:39-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9qtkjo49l6",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T15:58:10-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9rdq74q8d2",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:13:50-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9rmljcpoqp",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:20:44-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9rmlwgv7ho",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:20:44-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9seo9j0nt5",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:34-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9seotv1odz",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:35-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9sepf1oqxo",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:35-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9seqcfj74g",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:37-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9seqtf9fap",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:37-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9ser9147kv",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T16:42:38-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9znn11f8z6",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:29-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9znnfhk879",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9znntho8nk",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:30-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9znrs1iful",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:36-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9zns23r1e7",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:36-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mw9znsbb9as2",
+      "side": "claude",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:05:36-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mwa0yof1ku4g",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:42:04-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mwa0yomav5dq",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:42:04-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mwa0yot0lovt",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:42:05-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mwa0yp0lcqnt",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:42:05-05:00",
+      "by": "john"
+    },
+    {
+      "id": "mwa0yp9j9opz",
+      "side": "codex",
+      "window": "five_hour",
+      "add": 1,
+      "at": "2026-11-09T20:42:05-05:00",
+      "by": "john"
+    }
   ],
   "usage": {
     "codex": {
-      "five_hour_used_pct": 28,
-      "week_used_pct": 30,
-      "as_of": "2026-11-09T05:08:12-05:00"
+      "five_hour_used_pct": 49,
+      "week_used_pct": 51,
+      "as_of": "2026-11-09T21:17:50.026109-05:00"
     }
   }
 }
