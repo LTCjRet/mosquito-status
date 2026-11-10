@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "active",
-  "task": "Review PR73; implement disabled durable task queue for automatic pickup",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/71",
+  "state": "idle",
+  "task": "P1 one-shot ready Tue09 ET; queue PR75 awaits Claude review; meter PR74 changes needed",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/75",
   "needs_john": null,
   "started": "2026-11-09T21:01:34.366927-05:00",
-  "updated": "2026-11-09T21:01:34.366927-05:00"
+  "updated": "2026-11-09T21:17:50.026109-05:00"
 }
