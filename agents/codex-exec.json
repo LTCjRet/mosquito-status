@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "P1 one-shot ready Tue09 ET; queue PR75 awaits Claude review; meter PR74 changes needed",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/75",
+  "state": "active",
+  "task": "Continue disabled automatic-tasking preparation and outstanding PR review handoffs",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/71",
   "needs_john": null,
-  "started": "2026-11-09T21:01:34.366927-05:00",
-  "updated": "2026-11-09T21:17:50.026109-05:00"
+  "started": "2026-11-10T00:46:16.927380-05:00",
+  "updated": "2026-11-10T00:46:16.927380-05:00"
 }
