@@ -4,10 +4,10 @@
   "role": "Worker (owner request) and reviewer",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "reviewing",
-  "task": "PR89 FAC bridge (RCON Server Input) awaiting Codex review + 2 proofs on John PC (editor ServerInput layout, live T1); export held",
+  "state": "waiting",
+  "task": "PR89 FAC bridge awaiting Codex re-review (+2 proofs on John PC before enabling); PR90 approved; waiting on John VR smoke check",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
-  "needs_john": null,
+  "needs_john": "VR check of Codex_Ridge_Reference_Marker: reference smoke visible throughout? white mark at ~72 s?",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T16:02:39-05:00"
+  "updated": "2026-11-10T18:15:16-05:00"
 }
