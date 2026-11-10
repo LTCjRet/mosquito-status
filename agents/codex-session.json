@@ -4,10 +4,10 @@
   "role": "Codex session worker",
   "reviews_for": null,
   "reviewed_by": "claude-review-session",
-  "state": "active",
-  "task": "P1 launcher audit (read-only)",
+  "state": "idle",
+  "task": "P1 launcher audit (read-only): Codex exit 0",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/56",
   "needs_john": null,
   "started": "2026-11-10T06:17:46+00:00",
-  "updated": "2026-11-10T06:17:46+00:00"
+  "updated": "2026-11-10T06:18:57+00:00"
 }
