@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "waiting-for-john",
-  "task": "Ridge mission intent interview; original narrative preserved, aircraft and player counts awaiting owner choices",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/82",
-  "needs_john": "Answer ridge mission interview: player roles, aircraft choices, human and total aircraft counts",
+  "state": "active",
+  "task": "Ridge interview complete; PR83 cooperative definition and event graph under paired review; native generator integration pending",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/83",
+  "needs_john": null,
   "started": "2026-11-10T12:16:50-05:00",
-  "updated": "2026-11-10T12:17:30-05:00"
+  "updated": "2026-11-10T12:35:24-05:00"
 }
