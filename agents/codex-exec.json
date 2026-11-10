@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "idle",
-  "task": "Merged PR74/76/78/79/80 after paired approval and Windows checks; PR77 verified; launcher preflight only",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/80",
+  "task": "Merged PR74/76/78/79/80/81 with paired reviews and Windows checks; PR77 verified; live launcher remains held",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/81",
   "needs_john": null,
   "started": "2026-11-10T11:19:00-05:00",
-  "updated": "2026-11-10T11:48:08-05:00"
+  "updated": "2026-11-10T11:49:55-05:00"
 }
