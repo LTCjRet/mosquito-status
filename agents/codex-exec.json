@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "P1 ran immediately: exit0/report kept/released; no future trigger; paired report review queued",
-  "link": "https://github.com/LTCjRet/mosquito-controller/issues/69#issuecomment-6760584518",
+  "state": "waiting-for-john",
+  "task": "PR76 fix pushed 8849fa3; Claude re-review and Windows tests pending; PR77 docs content approved; PR74 containment validation pending",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/76",
   "needs_john": null,
-  "started": "2026-11-10T01:17:13.607040-05:00",
-  "updated": "2026-11-10T01:22:18.349075-05:00"
+  "started": "2026-11-10T10:56:57-05:00",
+  "updated": "2026-11-10T10:56:57-05:00"
 }
