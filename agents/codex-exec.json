@@ -2,12 +2,12 @@
   "agent": "codex-exec",
   "model": "codex",
   "role": "Executive",
-  "reviews_for": null,
+  "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "idle",
-  "task": "PR #65 corrected at bb94a2c; documentation checks passed; Claude review queued #67",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/65",
+  "state": "reviewing",
+  "task": "Issue #68: exact-head P1 re-review 9c5ab4e, Windows suites and direct-Python smoke",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/68",
   "needs_john": null,
-  "started": "2026-11-09T20:06:57-05:00",
-  "updated": "2026-11-09T20:09:32-05:00"
+  "started": "2026-11-09T20:12:38-05:00",
+  "updated": "2026-11-09T20:12:38-05:00"
 }
