@@ -4,10 +4,10 @@
   "role": "Worker (owner request) and reviewer",
   "reviews_for": null,
   "reviewed_by": "codex-exec",
-  "state": "waiting-for-john",
-  "task": "Channel header fix #73 (Codex APPROVE); #71 design reviewed (APPROVE A); zero-model Claude meter path found, awaiting Codex PC probe",
+  "state": "idle",
+  "task": "Merged #59 (P1 job) and #73 (channel header fix) under John's delegation; P1 task setup handed to Codex; Claude meter awaits Codex PC probe",
   "link": "https://github.com/LTCjRet/mosquito-controller/issues/72",
-  "needs_john": "Merge #59 before 08:30 ET; merge #73; decide #71 (A recommended by both)",
+  "needs_john": "Only if you want automatic pickup switched on later (#71, built disabled first)",
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-09T21:05:00-05:00"
+  "updated": "2026-11-09T21:07:00-05:00"
 }
