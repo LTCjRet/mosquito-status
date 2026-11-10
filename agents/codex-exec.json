@@ -4,10 +4,10 @@
   "role": "Executive",
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
-  "state": "reviewing",
-  "task": "Reviewing PR82 mission comparison and approved mission-creation handoff",
+  "state": "blocked",
+  "task": "PR82 changes needed; Windows11 pass, malformed-input probes fail; awaiting corrected exact head",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/82",
   "needs_john": null,
   "started": "2026-11-10T12:06:22-05:00",
-  "updated": "2026-11-10T12:06:22-05:00"
+  "updated": "2026-11-10T12:12:40-05:00"
 }
