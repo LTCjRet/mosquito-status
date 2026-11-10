@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting",
-  "task": "Reviewed+merged Codex's task queue #75; Claude meter #74 fixed at 067f2f8 (tree cleanup, zero-cost proof), awaiting Codex re-review; P1 registered for 09:00 ET",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/74",
+  "task": "P1 ran early (exit 0) and its audit reviewed; #74 meter fixed at 2cf4725; #76 checker CHANGES NEEDED; #77 docs; all awaiting Codex",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/72",
   "needs_john": null,
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T00:55:00-05:00"
+  "updated": "2026-11-10T01:23:00-05:00"
 }
