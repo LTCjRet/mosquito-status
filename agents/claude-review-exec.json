@@ -5,9 +5,9 @@
   "reviews_for": null,
   "reviewed_by": "codex-exec",
   "state": "waiting",
-  "task": "PR89 FAC bridge awaiting Codex re-review (+2 proofs on John PC before enabling); PR90 approved; waiting on John VR smoke check",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
-  "needs_john": "VR check of Codex_Ridge_Reference_Marker: reference smoke visible throughout? white mark at ~72 s?",
+  "task": "Resynced with Codex: PR89/PR90 merged; reviewed smoke sustainer/WP proposal and proposed a 4-way smoke comparison (white single, villagesmoke_loop, white re-Start sustainer, chimney control)",
+  "link": "https://github.com/LTCjRet/mosquito-controller/issues/72",
+  "needs_john": null,
   "started": "2026-11-09T01:40:00-05:00",
-  "updated": "2026-11-10T18:15:16-05:00"
+  "updated": "2026-11-11T17:40:53-05:00"
 }
