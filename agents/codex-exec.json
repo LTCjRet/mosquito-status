@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "TEST 01 - Smoke Baseline installed with numbered title/messages; awaiting identified flight observation. Counterpart notified.",
+  "task": "TEST 02 - Loop Smoke compiled and installed; intended90s smoke window, completion100s; awaiting flight result. Claude informed.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-11T17:48:04-05:00",
-  "updated": "2026-11-11T17:49:05-05:00"
+  "started": "2026-11-11T18:30:30-05:00",
+  "updated": "2026-11-11T18:34:15-05:00"
 }
