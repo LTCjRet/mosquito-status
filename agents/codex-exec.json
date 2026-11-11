@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "Reference-marker preview compiled, checked and installed separately; awaiting VR visibility check; PR90 final evidence awaiting paired review",
-  "link": "https://github.com/LTCjRet/mosquito-controller/pull/90",
+  "task": "Close-range smoke diagnostic compiled and installed; flight visibility pending. PR89 reviewed and merged; PR90 merged.",
+  "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-10T16:43:27-05:00",
-  "updated": "2026-11-10T16:55:00-05:00"
+  "started": "2026-11-11T01:49:02-05:00",
+  "updated": "2026-11-11T02:04:00-05:00"
 }
