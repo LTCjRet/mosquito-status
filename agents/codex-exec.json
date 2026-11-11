@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "Read smoke follow-up; immediate-start white/chimney diagnostic source prepared, awaiting editor compilation. Bunker smoke visible; FAC white unseen.",
+  "task": "Immediate-start white/chimney smoke diagnostic compiled, checked and installed separately; awaiting flight comparison.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-11T02:43:04-05:00",
-  "updated": "2026-11-11T02:44:30-05:00"
+  "started": "2026-11-11T02:45:09-05:00",
+  "updated": "2026-11-11T02:48:00-05:00"
 }
