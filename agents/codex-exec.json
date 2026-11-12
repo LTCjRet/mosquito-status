@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "TEST 06 Yellow Volume compiled/installed;five ground+four raised sources vs single;editor closed;flight result pending.",
+  "task": "TEST 07A Parked and 07B Airborne compiled/installed: yellow airfield smoke comparison, 750m, 2.5m spacing; editor closed; flight observations pending.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-12T12:49:15-05:00",
-  "updated": "2026-11-12T12:54:00-05:00"
+  "started": "2026-11-12T13:54:03-05:00",
+  "updated": "2026-11-12T14:07:56-05:00"
 }
