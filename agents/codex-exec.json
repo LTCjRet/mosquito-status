@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "TEST 03 Signal Smoke researched, editor-compiled and installed; white/yellow finite-refresh comparison awaits flight; counterpart informed.",
+  "task": "TEST 04 Visible Reference grounded/editor-compiled/installed:7km approach, immediate chimney/hangar,200m offsets; flight observation pending.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-12T11:35:56-05:00",
-  "updated": "2026-11-12T11:40:00-05:00"
+  "started": "2026-11-12T11:58:53-05:00",
+  "updated": "2026-11-12T12:04:00-05:00"
 }
