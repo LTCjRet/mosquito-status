@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "TEST10 Sized Bursts parkedonly installed: eight distinct sustained footprint layouts,15s starts15..120,wind0.5m/s; editorclosed; visual comparison pending.",
+  "task": "TEST11 Filled Density installed:733ground filled-disc sources at constantarea density, explicit15s next-startchain,wind1.5m/s;editorclosed;rendering/performancepending.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-13T15:36:00-05:00",
-  "updated": "2026-11-13T15:42:58-05:00"
+  "started": "2026-11-13T15:56:00-05:00",
+  "updated": "2026-11-13T16:03:52-05:00"
 }
