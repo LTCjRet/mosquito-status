@@ -5,9 +5,9 @@
   "reviews_for": "claude-review-exec",
   "reviewed_by": "claude-review-exec",
   "state": "waiting-for-john",
-  "task": "Test07 no obvious bands/gaps recorded. Test08 six munition-inspired profiles source ready: parked white375m / airborne yellow; awaits editor terrain checks and compilation, not installed.",
+  "task": "TEST08A Parked White375m and08B Airborne Yellow: eight researched munition-inspired smoke profiles compiled/installed, editor closed; flight observations pending.",
   "link": "https://github.com/LTCjRet/mosquito-controller/pull/89",
   "needs_john": null,
-  "started": "2026-11-13T14:46:00-05:00",
-  "updated": "2026-11-13T14:49:31-05:00"
+  "started": "2026-11-13T14:50:00-05:00",
+  "updated": "2026-11-13T14:58:23-05:00"
 }
